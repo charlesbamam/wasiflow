@@ -45,8 +45,8 @@ export default function DiarioPage() {
         { id: 3, student: "Joãozinho", subject: "Ciências", title: "Experiência: Ciclo da Água", date: "02/03/2026", status: "Concluído", duration: "2h", notes: "Montamos o mini-terrrário para observar a evaporação. Ficou muito engajado no processo." },
         { id: 6, student: "Mariazinha", subject: "Inglês", title: "Vocabulário de Animais", date: "02/03/2026", status: "Pendente", duration: "-", notes: "Praticar a pronúncia dos animais da fazenda. Falta completar a página 12." },
         { id: 4, student: "Mariazinha", subject: "Artes", title: "Pintura com Aquarela", date: "02/03/2026", status: "Concluído", duration: "1h", notes: "Explorou mistura de cores primárias. Criou um desenho de paisagem." },
-        { id: 5, student: "Joãozinho", subject: "História", title: "Brasil Colônia", date: "01/03/2026", status: "Pendente", duration: "-", notes: "Início do capítulo 4. Necessário revisar os pontos sobre as Capitanias Hereditárias." },
-        { id: 7, student: "Joãozinho", subject: "Geografia", title: "Relevo Brasileiro", date: "01/03/2026", status: "Pendente", duration: "-", notes: "Assistir o vídeo sobre planaltos e planícies anexado no módulo." },
+        { id: 5, student: "Joãozinho", subject: "História", title: "Civilizações Antigas", date: "01/03/2026", status: "Pendente", duration: "-", notes: "Início do capítulo 4. Necessário revisar os pontos sobre a Grécia Antiga." },
+        { id: 7, student: "Joãozinho", subject: "Geografia", title: "Formação de Relevo", date: "01/03/2026", status: "Pendente", duration: "-", notes: "Assistir o vídeo sobre placas tectônicas e vulcanismo anexado no módulo." },
     ];
 
     const filteredActivities = activities.filter(a =>
