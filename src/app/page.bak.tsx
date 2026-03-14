@@ -32,7 +32,7 @@ export default function LandingPage() {
   const t = translations[lang];
 
   useEffect(() => {
-    const consent = localStorage.getItem("wasiflow-consent-v4");
+    const consent = localStorage.getItem("hs-xpert-consent-v4");
     if (!consent) {
        const timer = setTimeout(() => setShowCookies(true), 1500);
        return () => clearTimeout(timer);
@@ -51,7 +51,7 @@ export default function LandingPage() {
   }, [lang]);
 
   const acceptCookies = () => {
-    localStorage.setItem("wasiflow-consent-v4", "true");
+    localStorage.setItem("hs-xpert-consent-v4", "true");
     setShowCookies(false);
   };
 
@@ -404,16 +404,12 @@ export default function LandingPage() {
         {/* Footer Minimal */}
         <footer className="py-20 bg-white border-t border-[#E8E8E8]">
            <div className="max-w-[1240px] mx-auto px-6 text-center">
-              <div className="mb-8 flex justify-center items-center">
-                <div className="relative w-40 h-12">
-                  <Image 
-                    src="/wasiflow_logo.svg" 
-                    alt="Wasiflow Logo" 
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              </div>
+              <div className="mb-8 flex justify-center items-center gap-2">
+               <div className="bg-[#0E625E] p-1.5 rounded-lg">
+                 <Sparkles className="w-5 h-5 text-white" />
+               </div>
+               <span className="font-bold text-xl tracking-tighter text-[#0E625E] uppercase">HS XPERT</span>
+             </div>
              <p className="text-slate-400 text-sm font-bold uppercase tracking-widest">{t.footer.rights}</p>
            </div>
         </footer>

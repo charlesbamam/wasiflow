@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Sparkles, Menu, X, Globe } from "lucide-react";
+import Image from "next/image";
+import { Menu, X, Globe } from "lucide-react";
 import { useState } from "react";
 import { translations } from "@/lib/translations";
 
@@ -19,10 +20,15 @@ export function Header({ lang, setLang }: HeaderProps) {
       <header className="fixed top-0 w-full z-[100] bg-white/80 backdrop-blur-md border-b border-[#E8E8E8] h-20">
         <div className="max-w-[1240px] mx-auto h-full px-6 flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2">
-            <div className="bg-[#0E625E] p-1.5 rounded-lg">
-              <Sparkles className="w-5 h-5 text-white" />
+            <div className="relative w-40 h-10">
+              <Image 
+                src="/wasiflow_logo.svg" 
+                alt="Wasiflow Logo" 
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
-            <span className="font-bold text-xl tracking-tighter text-[#0E625E] uppercase">HS XPERT</span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
@@ -61,10 +67,14 @@ export function Header({ lang, setLang }: HeaderProps) {
            <div className="p-6 flex flex-col h-full">
               <div className="flex justify-between items-center mb-12">
                 <div className="flex items-center gap-2">
-                  <div className="bg-[#0E625E] p-1.5 rounded-lg">
-                    <Sparkles className="w-5 h-5 text-white" />
+                  <div className="relative w-40 h-10">
+                    <Image 
+                      src="/wasiflow_logo.svg" 
+                      alt="Wasiflow Logo" 
+                      fill
+                      className="object-contain"
+                    />
                   </div>
-                  <span className="font-bold text-xl tracking-tighter text-[#0E625E] uppercase">HS XPERT</span>
                 </div>
                 <button onClick={() => setIsMenuOpen(false)}>
                   <X size={24} className="text-[#0E625E]" />

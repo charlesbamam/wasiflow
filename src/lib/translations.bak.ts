@@ -56,20 +56,20 @@ export const translations = {
       }
     },
     showcase: {
-      tag: "POR DENTRO DO WASIFLOW",
+      tag: "POR DENTRO DO HS XPERT",
       title: "Uma interface desenhada para famílias",
       desc: "Simples, intuitiva e poderosa. Veja como é fácil gerenciar a educação dos seus filhos em um só lugar."
     },
     faq: {
       title: "Perguntas Frequentes",
-      subtitle: "Compilamos as principais dúvidas das famílias que escolhem o Wasiflow para gerir sua jornada educativa.",
+      subtitle: "Compilamos as principais dúvidas das famílias que escolhem o HS Xpert para gerir sua jornada educativa.",
       questions: [
         {
           q: "O Homeschooling é legal?",
-          a: "Sim, na maioria das jurisdições as famílias têm o direito de educar seus filhos em casa. O Wasiflow ajuda você a manter toda a documentação necessária para garantir a organização e conformidade pedagógica."
+          a: "Sim, na maioria das jurisdições as famílias têm o direito de educar seus filhos em casa. O HS Xpert ajuda você a manter toda a documentação necessária para garantir a organização e conformidade pedagógica."
         },
         {
-          q: "O Wasiflow serve para famílias iniciantes?",
+          q: "O HS Xpert serve para famílias iniciantes?",
           a: "Com certeza! Nossa plataforma foi desenhada para guiar famílias desde o primeiro dia, facilitando a organização documental e o planejamento pedagógico."
         },
         {
@@ -86,11 +86,11 @@ export const translations = {
         },
         {
           q: "Existe suporte para famílias com mais de um filho?",
-          a: "Sim! O Wasiflow permite gerenciar múltiplos perfis de alunos com registros independentes, carga horária e planos de aula específicos para cada um."
+          a: "Sim! O HS Xpert permite gerenciar múltiplos perfis de alunos com registros independentes, carga horária e planos de aula específicos para cada um."
         },
         {
           q: "O sistema funciona no celular?",
-          a: "Sim! O Wasiflow é um Web App otimizado para navegadores mobile. Você pode adicionar um atalho na tela inicial do seu iPhone ou Android e usar como se fosse um aplicativo nativo."
+          a: "Sim! O HS Xpert é um Web App otimizado para navegadores mobile. Você pode adicionar um atalho na tela inicial do seu iPhone ou Android e usar como se fosse um aplicativo nativo."
         },
         {
           q: "Meus dados estão seguros?",
@@ -98,11 +98,11 @@ export const translations = {
         },
         {
           q: "Preciso de conhecimentos tecnológicos avançados?",
-          a: "Não. Se você sabe usar o WhatsApp, saberá usar o Wasiflow. Nossa interface foi desenhada para ser simples e intuitiva, focada no dia a dia da família."
+          a: "Não. Se você sabe usar o WhatsApp, saberá usar o HS Xpert. Nossa interface foi desenhada para ser simples e intuitiva, focada no dia a dia da família."
         },
         {
           q: "Existe um limite de estudantes?",
-          a: "Não! No Wasiflow você pode cadastrar todos os seus filhos sem custo adicional. Acreditamos que a educação familiar deve ser acessível para famílias de todos os tamanhos."
+          a: "Não! No HS Xpert você pode cadastrar todos os seus filhos sem custo adicional. Acreditamos que a educação familiar deve ser acessível para famílias de todos os tamanhos."
         },
         {
           q: "Posso cancelar a assinatura quando quiser?",
@@ -140,7 +140,7 @@ export const translations = {
       button: "Inscrever-se"
     },
     footer: {
-      rights: "© 2026 WASIFLOW. TODOS OS DIREITOS RESERVADOS.",
+      rights: "© 2026 HS XPERT. TODOS OS DIREITOS RESERVADOS.",
       privacy: "Política de Privacidade",
       terms: "Termos de Uso"
     },
@@ -207,20 +207,20 @@ export const translations = {
       }
     },
     showcase: {
-      tag: "INSIDE WASIFLOW",
+      tag: "INSIDE HS XPERT",
       title: "An interface designed for families",
       desc: "Simple, intuitive, and powerful. See how easy it is to manage your children's education in one place."
     },
     faq: {
       title: "Frequently Asked Questions",
-      subtitle: "We've compiled the main questions from families who choose Wasiflow for their educational journey.",
+      subtitle: "We've compiled the main questions from families who choose HS Xpert for their educational journey.",
       questions: [
         {
           q: "Is Homeschooling legal?",
-          a: "Yes, in most jurisdictions, families have the right to educate their children at home. Wasiflow helps you keep all the necessary documentation for organization and pedagogical compliance."
+          a: "Yes, in most jurisdictions, families have the right to educate their children at home. HS Xpert helps you keep all the necessary documentation for organization and pedagogical compliance."
         },
         {
-          q: "Is Wasiflow for beginner families?",
+          q: "Is HS Xpert for beginner families?",
           a: "Absolutely! Our platform was designed to guide families from day one, facilitating documentary organization and pedagogical planning."
         },
         {
@@ -237,11 +237,11 @@ export const translations = {
         },
         {
           q: "Is there support for families with more than one child?",
-          a: "Yes! Wasiflow allows managing multiple student profiles with independent records, hourly load, and specific lesson plans for each."
+          a: "Yes! HS Xpert allows managing multiple student profiles with independent records, hourly load, and specific lesson plans for each."
         },
         {
           q: "Does the system work on mobile?",
-          a: "Yes! Wasiflow is a Web App optimized for mobile browsers. You can add a shortcut to the home screen of your iPhone or Android and use it like a native app."
+          a: "Yes! HS Xpert is a Web App optimized for mobile browsers. You can add a shortcut to the home screen of your iPhone or Android and use it like a native app."
         },
         {
           q: "Is my data safe?",
@@ -249,11 +249,11 @@ export const translations = {
         },
         {
           q: "Do I need advanced technological knowledge?",
-          a: "No. If you know how to use WhatsApp, you will know how to use Wasiflow. Our interface was designed to be simple and intuitive, focused on family daily life."
+          a: "No. If you know how to use WhatsApp, you will know how to use HS Xpert. Our interface was designed to be simple and intuitive, focused on family daily life."
         },
         {
           q: "Is there a student limit?",
-          a: "No! In Wasiflow, you can register all your children at no additional cost. We believe home education should be accessible to families of all sizes."
+          a: "No! In HS Xpert, you can register all your children at no additional cost. We believe home education should be accessible to families of all sizes."
         },
         {
           q: "Can I cancel my subscription anytime?",
@@ -291,7 +291,7 @@ export const translations = {
       button: "Subscribe"
     },
     footer: {
-      rights: "© 2026 WASIFLOW. ALL RIGHTS RESERVED.",
+      rights: "© 2026 HS XPERT. ALL RIGHTS RESERVED.",
       privacy: "Privacy Policy",
       terms: "Terms of Use"
     },
