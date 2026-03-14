@@ -70,7 +70,7 @@ export default function ArtigoPage() {
             </div>
             <div className="flex items-center gap-2">
               <User size={18} className="text-[#0E625E]" />
-              <span>HS Xpert Team</span>
+              <span>Wasiflow Team</span>
             </div>
           </div>
 
@@ -115,7 +115,7 @@ export default function ArtigoPage() {
               </div>
             </div>
             <Link href="/register" className="bg-[#0E625E] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#D4C19D] hover:text-[#0E625E] transition-all shadow-lg">
-              {lang === "pt" ? "Experimente HS Xpert" : "Try HS Xpert"}
+              {lang === "pt" ? "Experimente Wasiflow" : "Try Wasiflow"}
             </Link>
           </div>
         </div>
@@ -125,10 +125,14 @@ export default function ArtigoPage() {
       <footer className="py-20 bg-white border-t border-slate-100">
         <div className="max-w-[1240px] mx-auto px-6 text-center">
           <Link href="/" className="inline-flex items-center gap-2 mb-8">
-            <div className="bg-[#0E625E] p-1.5 rounded-lg text-white">
-              <Sparkles size={18} />
+            <div className="relative w-40 h-10">
+              <Image 
+                src="/wasiflow_logo.svg" 
+                alt="Wasiflow Logo" 
+                fill
+                className="object-contain"
+              />
             </div>
-            <span className="font-bold text-xl tracking-tighter text-[#0E625E] uppercase">HS XPERT</span>
           </Link>
           <p className="text-slate-400 text-sm font-medium">© 2026 HS Xpert. All rights reserved.</p>
         </div>
