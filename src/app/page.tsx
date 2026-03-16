@@ -202,7 +202,7 @@ export default function LandingPage() {
                  </div>
                   <div className="flex-1 w-full flex items-center justify-center">
                     <div className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white rotate-1 transition-transform hover:rotate-0 duration-500">
-                       <Image src="/ai_pedagogical_assistant_chat_interface_1773437256794.png" alt="IA Assistant" fill className="object-cover" />
+                       <Image src="/ai_assistant_minimalist_chat.png" alt="IA Assistant" fill className="object-cover" />
                     </div>
                  </div>
               </div>
