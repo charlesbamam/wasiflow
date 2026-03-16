@@ -11,17 +11,21 @@ export default function AssistantDashboardPage() {
     const [isMessageRead, setIsMessageRead] = useState<boolean>(false);
 
     useEffect(() => {
-        const msg = localStorage.getItem("tutorMessage");
-        const time = localStorage.getItem("tutorTime");
-        const read = localStorage.getItem("tutorMessageRead") === "true";
-        if (msg) setTutorMessage(msg);
-        if (time) setMessageTime(time);
-        setIsMessageRead(read);
+        if (typeof window !== "undefined") {
+            const msg = localStorage.getItem("tutorMessage");
+            const time = localStorage.getItem("tutorTime");
+            const read = localStorage.getItem("tutorMessageRead") === "true";
+            if (msg) setTutorMessage(msg);
+            if (time) setMessageTime(time);
+            setIsMessageRead(read);
+        }
     }, []);
 
     const markAsRead = () => {
-        localStorage.setItem("tutorMessageRead", "true");
-        setIsMessageRead(true);
+        if (typeof window !== "undefined") {
+            localStorage.setItem("tutorMessageRead", "true");
+            setIsMessageRead(true);
+        }
     };
 
     return (

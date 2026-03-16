@@ -18,9 +18,11 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "HS Xpert - Gestão de Homeschooling",
-  description: "Acompanhe e gamifique o aprendizado em casa com apoio da Inteligência Artificial.",
+  title: "Wasiflow - Gestão Pedagógica Inteligente",
+  description: "Organize, Valide e Gamifique o Homeschooling com Inteligência Artificial.",
 };
+
+import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,
@@ -33,6 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} antialiased`}
       >
         {children}
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );

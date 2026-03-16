@@ -11,11 +11,12 @@ export default function PrivacyPage() {
           <ArrowLeft size={20} /> Voltar para o início
         </Link>
         
-        <h1 className="text-4xl font-black tracking-tighter mb-8 text-brand-primary">Política de Privacidade</h1>
-        
+        <h1 className="text-4xl font-extrabold text-slate-900 mb-4">Política de Privacidade</h1>
+        <p className="text-slate-500 mb-12">Última atualização: 14 de Março de 2026</p>
+
         <div className="prose prose-slate max-w-none space-y-6 text-slate-600 font-medium leading-relaxed">
           <p>
-            Esta Política de Privacidade descreve como o <strong>HS Xpert</strong> coleta, usa e protege as informações dos usuários, em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018).
+            A <strong>Wasiflow</strong> ("nós", "nosso") está comprometida em proteger sua privacidade. Esta Política de Privacidade explica como coletamos, usamos e protegemos suas informações ao utilizar nossa plataforma de gestão educacional, em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018).
           </p>
 
           <section>

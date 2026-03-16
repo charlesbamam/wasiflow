@@ -31,10 +31,12 @@ import { Input } from "@/components/ui/input";
 import {
     Card,
     CardContent,
+    CardDescription,
     CardHeader,
     CardTitle,
-    CardDescription,
 } from "@/components/ui/card";
+import { toast } from "sonner";
+
 
 export default function DiarioPage() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -164,7 +166,7 @@ export default function DiarioPage() {
                                                 <DropdownMenuContent align="end" className="w-48">
                                                     <DropdownMenuLabel>Ações</DropdownMenuLabel>
                                                     <DropdownMenuSeparator />
-                                                    <DropdownMenuItem className="cursor-pointer" onClick={() => alert("Editar registro: " + activity.title)}>
+                                                    <DropdownMenuItem className="cursor-pointer" onClick={() => toast.info("Edição de registro: " + activity.title)}>
                                                         <Pencil className="mr-2 h-4 w-4 text-slate-500" />
                                                         <span>Editar Registro</span>
                                                     </DropdownMenuItem>
@@ -172,12 +174,12 @@ export default function DiarioPage() {
                                                         <Printer className="mr-2 h-4 w-4 text-slate-500" />
                                                         <span>Imprimir Detalhes</span>
                                                     </DropdownMenuItem>
-                                                    <DropdownMenuItem className="cursor-pointer" onClick={() => alert("Registro marcado como revisado!")}>
+                                                    <DropdownMenuItem className="cursor-pointer" onClick={() => toast.success("Registro marcado como revisado!")}>
                                                         <Check className="mr-2 h-4 w-4 text-emerald-500" />
                                                         <span>Marcar como Revisado</span>
                                                     </DropdownMenuItem>
                                                     <DropdownMenuSeparator />
-                                                    <DropdownMenuItem className="text-red-600 focus:text-red-600 focus:bg-red-50 cursor-pointer" onClick={() => alert("Deseja realmente excluir este registro?")}>
+                                                    <DropdownMenuItem className="text-red-600 focus:text-red-600 focus:bg-red-50 cursor-pointer" onClick={() => toast.error("Função de exclusão em breve!")}>
                                                         <Trash className="mr-2 h-4 w-4" />
                                                         <span>Excluir Item</span>
                                                     </DropdownMenuItem>

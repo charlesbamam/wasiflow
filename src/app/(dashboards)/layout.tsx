@@ -20,7 +20,7 @@ export default function DashboardsLayout({
             <aside className="w-64 border-r bg-white flex flex-col hidden md:flex">
                 <div className="h-16 flex items-center px-6 border-b">
                     <Link href="/" className="font-bold text-xl text-emerald-700 tracking-tight">
-                        HS Xpert
+                        Wasiflow
                     </Link>
                 </div>
 

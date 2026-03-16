@@ -18,7 +18,7 @@ export default function LoginPage() {
         <div className="min-h-screen grid lg:grid-cols-2 bg-[#FAFAFA]">
             <div className="flex flex-col justify-center items-center p-8">
                 <Link href="/" className="mb-12 absolute top-8 left-8 text-emerald-700 font-bold text-2xl tracking-tight">
-                    HS Xpert
+                    Wasiflow
                 </Link>
 
                 <div className="w-full max-w-md">
@@ -26,7 +26,7 @@ export default function LoginPage() {
                         <CardHeader className="space-y-2">
                             <CardTitle className="text-3xl font-bold text-slate-900 tracking-tight">Login</CardTitle>
                             <CardDescription className="text-base text-slate-500">
-                                Acesse seu painel familiar HS Xpert.
+                                Acesse seu painel familiar Wasiflow.
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -81,11 +81,23 @@ export default function LoginPage() {
                                     Google
                                 </Button>
 
-                                <Link href="/admin" className="block w-full">
-                                    <Button className="w-full h-12 text-base font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl">
-                                        Fazer Login (Simulação)
-                                    </Button>
-                                </Link>
+                                <div className="space-y-3">
+                                    <p className="text-center text-[10px] uppercase tracking-widest font-bold text-slate-400">Paineis de Simulação</p>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Link href="/admin">
+                                            <Button variant="outline" className="w-full text-xs border-slate-200 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 h-10">Tutor (Principal)</Button>
+                                        </Link>
+                                        <Link href="/assistant">
+                                            <Button variant="outline" className="w-full text-xs border-slate-200 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 h-10">Auxiliar</Button>
+                                        </Link>
+                                        <Link href="/student">
+                                            <Button variant="outline" className="w-full text-xs border-slate-200 hover:bg-pink-50 hover:text-pink-700 hover:border-pink-200 h-10">Aluno</Button>
+                                        </Link>
+                                        <Link href="/superadmin">
+                                            <Button variant="outline" className="w-full text-xs border-slate-200 hover:bg-purple-50 hover:text-purple-700 hover:border-purple-200 h-10">Super Admin</Button>
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         </CardContent>
                         <CardFooter className="flex flex-col space-y-4 text-center">
@@ -108,7 +120,7 @@ export default function LoginPage() {
                 <div className="relative z-10 max-w-xl">
                     <h2 className="text-4xl font-bold mb-6">Organize, Valide e Gamifique o Homeschooling.</h2>
                     <p className="text-emerald-100 text-lg mb-8 leading-relaxed">
-                        Bem-vindo ao HS Xpert. Ajudamos tutores educadores a focar no que realmente importa: a jornada de aprendizado do aluno, deixando a gestão e a papelada com nosso sistema.
+                        Bem-vindo ao Wasiflow. Ajudamos tutores educadores a focar no que realmente importa: a jornada de aprendizado do aluno, deixando a gestão e a papelada com nosso sistema.
                     </p>
                     <div className="space-y-4">
                         <div className="flex items-center gap-3">

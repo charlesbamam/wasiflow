@@ -13,7 +13,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "../../../components/ui/textarea";
-import { Sparkles, X, Activity, Users, FileText, Bot, MessageCircle, UserPlus, Pencil, CheckCircle2, Clock, Send, Loader2, Download, CalendarDays, Calendar, Archive, Save, Trash, ChevronRight, BookOpen, Plus, Copy } from "lucide-react";
+import { toast } from "sonner";
+import { Sparkles, X, Activity, Users, FileText, Bot, MessageCircle, UserPlus, Pencil, CheckCircle2, Clock, Send, Loader2, Download, CalendarDays, Calendar, Archive, Save, Trash, ChevronRight, BookOpen, Plus, Copy, AlertTriangle } from "lucide-react";
+
 
 type Student = {
     id: string;
@@ -35,10 +37,19 @@ const getColorClasses = (color: string) => {
 };
 
 export default function AdminDashboardPage() {
+    const [mounted, setMounted] = useState(false);
     const [showBanner, setShowBanner] = useState(true);
     const [tutorMessage, setTutorMessage] = useState("");
     const [messageSent, setMessageSent] = useState(false);
     const [isMessageRead, setIsMessageRead] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // Estados de Carregamento (Loading Flags)
+    const [isSavingStudent, setIsSavingStudent] = useState(false);
+    const [isSavingTask, setIsSavingTask] = useState(false);
 
     // Auxiliar (simulação)
     const [hasAuxiliar, setHasAuxiliar] = useState(false);
@@ -106,20 +117,37 @@ export default function AdminDashboardPage() {
     };
 
     const handleSaveStudent = () => {
-        if (!studentForm.name || !studentForm.age || !studentForm.grade) return;
-
-        if (editingStudent) {
-            setStudents(students.map(s => s.id === editingStudent.id ? { ...s, ...studentForm } : s));
-        } else {
-            setStudents([...students, { id: Math.random().toString(), ...studentForm }]);
+        if (!studentForm.name || !studentForm.age || !studentForm.grade) {
+            toast.error("Preencha todos os campos do aluno.");
+            return;
         }
-        setIsStudentModalOpen(false);
+
+        setIsSavingStudent(true);
+        setTimeout(() => {
+            if (editingStudent) {
+                setStudents(students.map(s => s.id === editingStudent.id ? { ...s, ...studentForm } : s));
+                toast.success("Dados do aluno atualizados!");
+            } else {
+                setStudents([...students, { id: Math.random().toString(), ...studentForm }]);
+                toast.success("Novo aluno adicionado com sucesso!");
+            }
+            setIsStudentModalOpen(false);
+            setEditingStudent(null);
+            setIsSavingStudent(false);
+        }, 1200);
     };
 
-    const handleDeleteStudent = (id: string) => {
-        if (confirm("Tem certeza que deseja excluir as informações deste aluno? O histórico será perdido.")) {
-            setStudents(students.filter(s => s.id !== id));
-        }
+    const handleDeleteStudent = (id: string, name: string) => {
+        toast(`Deseja excluir ${name}?`, {
+            action: {
+                label: "Excluir",
+                onClick: () => {
+                    setStudents(students.filter(s => s.id !== id));
+                    toast.success(`${name} removido com sucesso.`);
+                    if (viewingProfile?.id === id) setViewingProfile(null);
+                }
+            },
+        });
     };
 
     const openCreateTaskModal = () => {
@@ -131,7 +159,7 @@ export default function AdminDashboardPage() {
         if (!taskForm.title || !taskForm.category) return;
         // Aqui simularia salvar a tarefa vinculada ao viewingProfile.id
         console.log("Tarefa Criada para", viewingProfile?.name, taskForm);
-        alert(`Tarefa "${taskForm.title}" criada com sucesso para ${viewingProfile?.name}!`);
+        toast.success(`Tarefa "${taskForm.title}" criada com sucesso para ${viewingProfile?.name}!`);
         setIsTaskModalOpen(false);
     };
 
@@ -143,6 +171,8 @@ export default function AdminDashboardPage() {
     }, [chatMessages, isTyping, isChatOpen]);
 
     useEffect(() => {
+        if (!mounted) return;
+        
         const checkReadStatus = setInterval(() => {
             const read = localStorage.getItem("tutorMessageRead") === "true";
             if (read !== isMessageRead) {
@@ -150,10 +180,10 @@ export default function AdminDashboardPage() {
             }
         }, 1500);
         return () => clearInterval(checkReadStatus);
-    }, [isMessageRead]);
+    }, [isMessageRead, mounted]);
 
     const sendMessage = () => {
-        if (tutorMessage.trim()) {
+        if (tutorMessage.trim() && mounted) {
             localStorage.setItem("tutorMessage", tutorMessage);
             localStorage.setItem("tutorMessageRead", "false"); // Reseta lido
 
@@ -163,6 +193,7 @@ export default function AdminDashboardPage() {
 
             setMessageSent(true);
             setIsMessageRead(false);
+            toast.success("Recado enviado para o auxiliar!");
             setTimeout(() => setMessageSent(false), 3000);
             setTutorMessage("");
         }
@@ -343,7 +374,7 @@ export default function AdminDashboardPage() {
                                                     <Pencil className="h-4 w-4" />
                                                 </Button>
                                                 <Button
-                                                    onClick={() => { console.log('Deleting student:', student.id); handleDeleteStudent(student.id); }}
+                                                    onClick={() => { console.log('Deleting student:', student.id); handleDeleteStudent(student.id, student.name); }}
                                                     variant="ghost"
                                                     size="icon"
                                                     className="text-red-500 hover:text-red-700 hover:bg-red-50"
@@ -397,7 +428,7 @@ export default function AdminDashboardPage() {
                                                     size="sm"
                                                     onClick={() => {
                                                         navigator.clipboard.writeText(inviteLink);
-                                                        alert("O link do seu convite foi copiado! Envie este link pelo WhatsApp ou Email para a pessoa.");
+                                                        toast.success("O link do seu convite foi copiado! Envie este link pelo WhatsApp ou Email para a pessoa.");
                                                     }}
                                                     className="bg-emerald-600 hover:bg-emerald-700 h-9 shrink-0 px-3"
                                                 >
@@ -413,7 +444,7 @@ export default function AdminDashboardPage() {
                                                 variant="outline"
                                                 size="sm"
                                                 onClick={() => {
-                                                    alert("Simulação: A outra pessoa clicou no link e criou a conta.");
+                                                    toast.info("Simulação: A outra pessoa clicou no link e criou a conta.");
                                                     setHasAuxiliar(true);
                                                 }}
                                                 className="mt-2 text-xs border-dashed text-slate-500 hover:text-emerald-700 hover:bg-emerald-50 h-7"
@@ -465,7 +496,7 @@ export default function AdminDashboardPage() {
 
                                         <div className="flex justify-between items-center px-1">
                                             <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Aparecerá no painel dela</p>
-                                            {isMessageRead && localStorage.getItem("tutorMessage") && (
+                                            {mounted && isMessageRead && localStorage.getItem("tutorMessage") && (
                                                 <span className="text-[10px] uppercase tracking-wider font-bold text-emerald-600 flex items-center bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200">
                                                     <CheckCircle2 size={10} className="mr-1" /> Auxiliar ciente
                                                 </span>
@@ -790,8 +821,9 @@ export default function AdminDashboardPage() {
                         {/* Footer */}
                         <div className="bg-slate-50 border-t border-slate-100 p-4 flex justify-end gap-3">
                             <Button variant="ghost" onClick={() => setIsStudentModalOpen(false)} className="text-slate-600 hover:text-slate-800">Cancelar</Button>
-                            <Button onClick={handleSaveStudent} className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-sm" disabled={!studentForm.name || !studentForm.grade || !studentForm.age}>
-                                <Save className="w-4 h-4 mr-2" /> {editingStudent ? 'Salvar Alterações' : 'Cadastrar Aluno'}
+                            <Button onClick={handleSaveStudent} className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-sm" disabled={!studentForm.name || !studentForm.grade || !studentForm.age || isSavingStudent}>
+                                {isSavingStudent ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
+                                {isSavingStudent ? "Salvando..." : editingStudent ? "Salvar Alterações" : "Cadastrar Aluno"}
                             </Button>
                         </div>
                     </div>
@@ -966,8 +998,9 @@ export default function AdminDashboardPage() {
                         {/* Footer */}
                         <div className="bg-slate-50 border-t border-slate-100 p-4 flex justify-end gap-3">
                             <Button variant="ghost" onClick={() => setIsTaskModalOpen(false)} className="text-slate-600 hover:text-slate-800">Cancelar</Button>
-                            <Button onClick={handleSaveTask} className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-sm" disabled={!taskForm.title}>
-                                <Save className="w-4 h-4 mr-2" /> Salvar Tarefa
+                            <Button onClick={handleSaveTask} className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-sm" disabled={!taskForm.title || isSavingTask}>
+                                {isSavingTask ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
+                                {isSavingTask ? "Salvando..." : "Salvar Tarefa"}
                             </Button>
                         </div>
                     </div>

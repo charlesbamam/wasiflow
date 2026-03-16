@@ -9,7 +9,7 @@ export default function SuperAdminDashboardPage() {
                 <div className="flex items-center justify-between">
                     <div>
                         <h1 className="text-3xl font-bold tracking-tight text-slate-900">Configurações Globais</h1>
-                        <p className="text-slate-500 mt-2">Visão geral do SaaS HS Xpert.</p>
+                        <p className="text-slate-500 mt-2">Visão geral do SaaS Wasiflow.</p>
                     </div>
                     <Button variant="outline" className="text-slate-700 bg-white">Exportar Relatório</Button>
                 </div>

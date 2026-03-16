@@ -17,16 +17,16 @@ export default function RegisterPage() {
     return (
         <div className="min-h-screen grid lg:grid-cols-2 bg-[#FAFAFA]">
             <div className="flex flex-col justify-center items-center p-8 relative">
-                <Link href="/" className="absolute top-8 left-8 text-emerald-700 font-bold text-2xl tracking-tight">
-                    HS Xpert
+                <Link href="/" className="mb-12 absolute top-8 left-8 text-emerald-700 font-bold text-2xl tracking-tight">
+                    Wasiflow
                 </Link>
 
                 <div className="w-full max-w-md">
                     <Card className="border-none shadow-lg bg-white/80 backdrop-blur-sm rounded-2xl">
-                        <CardHeader className="space-y-2">
+                        <CardHeader className="space-y-1 text-center">
                             <CardTitle className="text-3xl font-bold text-slate-900 tracking-tight">Criar Conta</CardTitle>
                             <CardDescription className="text-base text-slate-500">
-                                Inicie sua jornada de Homeschooling com a gente.
+                                Comece sua jornada educativa com a Wasiflow hoje.
                             </CardDescription>
                         </CardHeader>
                         <CardContent>

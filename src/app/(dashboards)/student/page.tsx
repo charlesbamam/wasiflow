@@ -10,6 +10,8 @@ import {
     ShoppingBag
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+
 
 export default function StudentDashboardPage() {
     const [tasks, setTasks] = useState([
@@ -199,7 +201,7 @@ export default function StudentDashboardPage() {
                                                 <Button
                                                     size="sm"
                                                     className="w-full mt-1 bg-purple-600 hover:bg-purple-700 text-white font-bold border-none shadow-md shadow-purple-200"
-                                                    onClick={() => alert(`Prêmio resgatado! ${reward.title}`)}
+                                                    onClick={() => toast.success(`Prêmio resgatado! ${reward.title}`)}
                                                 >
                                                     Resgatar Agora
                                                 </Button>
