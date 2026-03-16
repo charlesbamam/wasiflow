@@ -200,11 +200,15 @@ export default function LandingPage() {
                        ))}
                     </ul>
                  </div>
-                  <div className="flex-1 w-full flex items-center justify-center">
-                    <div className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white rotate-1 transition-transform hover:rotate-0 duration-500">
-                       <Image src="/ai_assistant_minimalist_chat.png" alt="IA Assistant" fill className="object-cover" />
-                    </div>
-                 </div>
+                   <div className="flex-1 w-full flex items-center justify-center relative">
+                     {/* Mascot Mask Overlay */}
+                     <div className="absolute -left-8 -bottom-8 w-48 h-48 z-10 drop-shadow-2xl transition-transform hover:scale-110 duration-300">
+                        <Image src="/wasiflow_mascot.png" alt="Wasiflow Mascot" fill className="object-contain" />
+                     </div>
+                     <div className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white rotate-1 transition-transform hover:rotate-0 duration-500 relative z-0">
+                        <Image src="/ai_assistant_minimalist_chat.png" alt="IA Assistant" fill className="object-cover" />
+                     </div>
+                  </div>
               </div>
 
                {/* Split 4: Activity Tracking */}
