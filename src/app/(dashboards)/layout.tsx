@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
     CreditCard,
@@ -19,8 +20,16 @@ export default function DashboardsLayout({
             {/* Sidebar Navigation */}
             <aside className="w-64 border-r bg-white flex flex-col hidden md:flex">
                 <div className="h-16 flex items-center px-6 border-b">
-                    <Link href="/" className="font-bold text-xl text-emerald-700 tracking-tight">
-                        Wasiflow
+                    <Link href="/" className="flex items-center gap-2">
+                        <div className="relative w-32 h-8">
+                            <Image 
+                                src="/wasiflow_logo.svg" 
+                                alt="Wasiflow Logo" 
+                                fill
+                                className="object-contain"
+                                priority
+                            />
+                        </div>
                     </Link>
                 </div>
 
