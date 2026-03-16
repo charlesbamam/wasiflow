@@ -270,15 +270,17 @@ export default function LandingPage() {
                     </p>
                  </div>
                  <div className="flex-1 relative w-full h-full min-h-[400px] flex items-center justify-center">
-                    <div className="grid grid-cols-2 gap-4">
-                       <div className="relative w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                    <div className="relative w-full max-w-[440px] h-64">
+                       {/* Couple Image (Behind) */}
+                       <div className="absolute left-0 top-0 w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl z-0">
                           <Image src="/authentic_parent_couple_white_1773496088495.png" alt="Tutor" fill className="object-cover" />
                        </div>
-                       <div className="relative w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-xl translate-y-12">
+                       {/* Mother/Woman Image (In front and larger) */}
+                       <div className="absolute right-0 bottom-0 w-56 h-56 rounded-full overflow-hidden border-4 border-white shadow-2xl z-10 -translate-x-8 -translate-y-4">
                           <Image src="/authentic_mother_homeschool_relief_1773496108710.png" alt="Assistant" fill className="object-cover" />
                        </div>
                     </div>
-                 </div>
+                  </div>
               </div>
             </div>
           </div>
