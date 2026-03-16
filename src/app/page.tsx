@@ -123,18 +123,18 @@ export default function LandingPage() {
         {/* Dynamic Features Grid */}
         <section id="features" className="bg-[#F0F9F9]/50 border-y border-slate-100 py-32 overflow-hidden">
           <div className="max-w-[1240px] mx-auto px-6">
-            <div className="reveal-on-scroll text-center mb-24">
+            <div className="reveal-on-scroll text-center mb-16">
               <span className="text-[#0E625E] font-bold uppercase tracking-[0.2em] text-[11px] mb-4 block">{t.features.tag}</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#0B0B0B] mb-8 max-w-4xl mx-auto">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#0B0B0B] mb-6 max-w-4xl mx-auto">
                 {t.features.title}
               </h2>
             </div>
 
             {/* Feature Splits */}
-            <div className="space-y-32">
+            <div className="space-y-20 md:space-y-24">
               {/* Split 1: Evidence Journal */}
-              <div className="reveal-on-scroll flex flex-col lg:flex-row items-center gap-16 lg:gap-32">
-                 <div className="flex-1 space-y-8">
+              <div className="reveal-on-scroll flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                 <div className="flex-1 space-y-6">
                     <div className="bg-[#BAE6FD]/40 p-4 rounded-xl w-fit text-[#0E625E]"><Zap size={40} /></div>
                     <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
                       {t.features.cards.diary.title}
@@ -150,23 +150,23 @@ export default function LandingPage() {
                        ))}
                     </ul>
                  </div>
-                 <div className="flex-1 relative w-full h-[400px] md:h-[500px]">
-                    <div className="absolute top-0 right-0 w-[85%] aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white z-10 rotate-2">
+                 <div className="flex-1 w-full flex items-center justify-center">
+                    <div className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white rotate-2 transition-transform hover:rotate-0 duration-500">
                        <Image src="/homeschooling_basics_v2_1773503526173.png" alt="Homeschooling basics" fill className="object-cover" />
                     </div>
                  </div>
               </div>
 
-               {/* Split 2: Legal Reports */}
-               <div className="reveal-on-scroll flex flex-col lg:flex-row-reverse items-center gap-16 lg:gap-32">
-                 <div className="flex-1 space-y-8">
-                    <div className="bg-[#D4C19D]/40 p-4 rounded-xl w-fit text-white"><Shield size={40} className="text-[#0B0B0B]" /></div>
-                    <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
-                       {t.features.cards.juridical.title}
-                    </h3>
-                    <p className="text-xl text-slate-500 font-medium leading-relaxed">
-                       {t.features.cards.juridical.desc}
-                    </p>
+                {/* Split 2: Legal Reports */}
+                <div className="reveal-on-scroll flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+                  <div className="flex-1 space-y-6">
+                     <div className="bg-[#D4C19D]/40 p-4 rounded-xl w-fit text-white"><Shield size={40} className="text-[#0B0B0B]" /></div>
+                     <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
+                        {t.features.cards.juridical.title}
+                     </h3>
+                     <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                        {t.features.cards.juridical.desc}
+                     </p>
                     <ul className="space-y-4">
                        {["Estrutura BNCC", "Formatos aceitos", "Histórico contínuo"].map((item, i) => (
                          <li key={i} className="flex items-center gap-3 text-slate-700 font-bold">
@@ -175,8 +175,8 @@ export default function LandingPage() {
                        ))}
                     </ul>
                  </div>
-                 <div className="flex-1 relative w-full h-[400px] md:h-[500px]">
-                    <div className="absolute top-0 left-0 w-[85%] aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white z-10 -rotate-2">
+                  <div className="flex-1 w-full flex items-center justify-center">
+                    <div className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white -rotate-2 transition-transform hover:rotate-0 duration-500">
                        <Image src="/evidence_journal_1773430210790.png" alt="Relatórios Jurídicos" fill className="object-cover" />
                     </div>
                  </div>
@@ -200,16 +200,16 @@ export default function LandingPage() {
                        ))}
                     </ul>
                  </div>
-                 <div className="flex-1 relative w-full h-[400px] md:h-[500px]">
-                    <div className="absolute top-0 right-0 w-[85%] aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white z-10 rotate-1">
+                  <div className="flex-1 w-full flex items-center justify-center">
+                    <div className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white rotate-1 transition-transform hover:rotate-0 duration-500">
                        <Image src="/ai_pedagogical_assistant_chat_interface_1773437256794.png" alt="IA Assistant" fill className="object-cover" />
                     </div>
                  </div>
               </div>
 
                {/* Split 4: Activity Tracking */}
-               <div className="reveal-on-scroll flex flex-col lg:flex-row-reverse items-center gap-16 lg:gap-32">
-                 <div className="flex-1 space-y-8">
+               <div className="reveal-on-scroll flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+                 <div className="flex-1 space-y-6">
                     <div className="bg-[#BAE6FD]/40 p-4 rounded-xl w-fit text-[#0E625E]"><LayoutDashboard size={40} /></div>
                     <span className="text-[#0E625E] font-bold uppercase tracking-widest text-xs">{t.features.cards.tracking.tag}</span>
                     <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
@@ -224,17 +224,16 @@ export default function LandingPage() {
                        </div>
                     </div>
                  </div>
-                 <div className="flex-1 relative w-full h-[400px] md:h-[500px]">
-                    <div className="absolute top-4 left-4 w-full h-full bg-[#0E625E]/5 rounded-[40px] -z-10" />
-                    <div className="w-full h-full rounded-[40px] overflow-hidden shadow-2xl border border-white">
+                 <div className="flex-1 w-full flex items-center justify-center">
+                    <div className="w-full h-full rounded-[40px] overflow-hidden shadow-2xl border border-white transition-all duration-500 hover:scale-[1.02]">
                        <Image src="/activity_tracking_clean_1773438984929.png" alt="Activity Tracking" fill className="object-cover" />
                     </div>
                  </div>
               </div>
 
                {/* Split 5: Gamification */}
-               <div className="reveal-on-scroll flex flex-col lg:flex-row items-center gap-16 lg:gap-32">
-                 <div className="flex-1 space-y-8">
+               <div className="reveal-on-scroll flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                 <div className="flex-1 space-y-6">
                     <div className="bg-[#D4C19D]/40 p-4 rounded-xl w-fit text-[#0E625E]"><Gamepad size={40} /></div>
                     <span className="text-[#0E625E] font-bold uppercase tracking-widest text-xs">{t.features.gamification.tag}</span>
                     <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
@@ -247,16 +246,16 @@ export default function LandingPage() {
                        {t.features.gamification.cta}
                     </button>
                  </div>
-                 <div className="flex-1 relative w-full h-[400px] md:h-[500px]">
-                    <div className="w-full h-full rounded-[40px] overflow-hidden shadow-2xl border border-white transform rotate-2">
+                 <div className="flex-1 w-full flex items-center justify-center">
+                    <div className="w-full h-full rounded-[40px] overflow-hidden shadow-2xl border border-white transform rotate-2 transition-transform hover:rotate-0 duration-500">
                        <Image src="/gamification_reports_check_1773436412931.png" alt="Gamification" fill className="object-cover" />
                     </div>
                  </div>
               </div>
 
                {/* Split 6: Collaboration */}
-               <div className="reveal-on-scroll flex flex-col lg:flex-row-reverse items-center gap-16 lg:gap-32">
-                 <div className="flex-1 space-y-8">
+               <div className="reveal-on-scroll flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+                 <div className="flex-1 space-y-6">
                     <div className="bg-[#BAE6FD]/40 p-4 rounded-xl w-fit text-[#0E625E]"><Users size={40} /></div>
                     <span className="text-[#0E625E] font-bold uppercase tracking-widest text-xs">{t.features.cards.collaboration.tag}</span>
                     <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
