@@ -18,8 +18,12 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Wasiflow - Gestão Pedagógica Inteligente",
-  description: "Organize, Valide e Gamifique o Homeschooling com Inteligência Artificial.",
+    title: "Wasiflow - Homeschooling com Propósito",
+    description: "Organize o progresso acadêmico, gerencie registros legais e gere relatórios automáticos com inteligência treinada na BNCC.",
+    robots: {
+        index: false,
+        follow: false,
+    },
 };
 
 import { Toaster } from "sonner";
