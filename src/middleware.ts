@@ -16,16 +16,22 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // 2. Tentar capturar o token da URL (?beta=...)
+  // 2. Tentar capturar o token da URL (aceita ?beta=... ou ?beta%3D...)
   const betaParam = searchParams.get('beta');
+  const fullSearch = request.nextUrl.search;
   const betaCookie = request.cookies.get('wasiflow_beta_access');
 
-  // 3. Se o código estiver na URL, salvar no cookie e liberar
-  if (betaParam === DEFAULT_BETA_TOKEN) {
+  // 3. Se o código estiver na URL (mesmo encodado), salvar no cookie e liberar
+  const hasValidToken = betaParam === DEFAULT_BETA_TOKEN || 
+                       fullSearch.includes(`beta=${DEFAULT_BETA_TOKEN}`) || 
+                       fullSearch.includes(`beta%3D${DEFAULT_BETA_TOKEN}`);
+
+  if (hasValidToken) {
     const response = NextResponse.next();
     response.cookies.set('wasiflow_beta_access', 'true', {
       maxAge: 60 * 60 * 24 * 30, // 30 dias de acesso
       path: '/',
+      sameSite: 'lax',
     });
     return response;
   }
