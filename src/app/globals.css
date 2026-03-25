@@ -3,7 +3,7 @@
 /* Design System - HS Xpert */
 :root {
   --brand-primary: #0E625E;
-  --brand-accent: #D4C19D;
+  --brand-accent: #C8B289;
   --brand-sky: #BAE6FD;
   --brand-mist: #FAFAFA;
   --brand-white: #FFFFFF;
@@ -80,15 +80,15 @@ body {
 
 /* Botões com Hover Personalizado */
 .btn-primary {
-  @apply bg-[#0E625E] text-white hover:bg-[#D4C19D] transition-all duration-300;
+  @apply bg-[#0E625E] text-white hover:bg-[#C8B289] transition-all duration-300;
 }
 
 .btn-secondary {
-  @apply bg-white text-[#0E625E] border border-[#E8E8E8] hover:border-[#D4C19D] hover:text-[#D4C19D] transition-all duration-300;
+  @apply bg-white text-[#0E625E] border border-[#E8E8E8] hover:border-[#C8B289] hover:text-[#C8B289] transition-all duration-300;
 }
 
 .link-hover {
-  @apply hover:text-[#D4C19D] transition-colors duration-300;
+  @apply hover:text-[#C8B289] transition-colors duration-300;
 }
 
 /* Custom Horizontal Scroll for Showcase */

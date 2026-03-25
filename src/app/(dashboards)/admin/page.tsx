@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "../../../components/ui/textarea";
 import { toast } from "sonner";
 import { Sparkles, X, Activity, Users, FileText, Bot, MessageCircle, UserPlus, Pencil, CheckCircle2, Clock, Send, Loader2, Download, CalendarDays, Calendar, Archive, Save, Trash, ChevronRight, BookOpen, Plus, Copy, AlertTriangle } from "lucide-react";
+import { motion } from "framer-motion";
 
 
 type Student = {
@@ -45,6 +46,26 @@ export default function AdminDashboardPage() {
 
     useEffect(() => {
         setMounted(true);
+        
+        // Carrega alunos do onboarding se existirem no localStorage
+        const saved = localStorage.getItem("wasiflow_onboarding_students");
+        if (saved) {
+            try {
+                const names = JSON.parse(saved) as string[];
+                const onboardingStudents: Student[] = names.map(name => ({
+                    id: Math.random().toString(),
+                    name: name,
+                    age: "8", 
+                    grade: "3º Ano",
+                    color: "emerald"
+                }));
+                setStudents(onboardingStudents);
+                // Limpa para evitar recarregamento duplicado em navegações futuras se desejar, 
+                // mas para o mock vamos apenas carregar se o estado estiver vazio.
+            } catch (e) {
+                console.error("Erro ao carregar dados do onboarding:", e);
+            }
+        }
     }, []);
 
     // Estados de Carregamento (Loading Flags)
@@ -88,11 +109,8 @@ export default function AdminDashboardPage() {
         ]
     };
 
-    // Students Management State
-    const [students, setStudents] = useState<Student[]>([
-        { id: '1', name: "Joãozinho", age: "8", grade: "Ensino Fundamental I", color: "blue" },
-        { id: '2', name: "Mariazinha", age: "5", grade: "Educação Infantil", color: "pink" }
-    ]);
+    // Students Management State (Inicia vazio para novos usuários)
+    const [students, setStudents] = useState<Student[]>([]);
     const [isStudentModalOpen, setIsStudentModalOpen] = useState(false);
     const [editingStudent, setEditingStudent] = useState<Student | null>(null);
     const [studentForm, setStudentForm] = useState({ name: '', age: '', grade: '', color: 'emerald' });
@@ -100,6 +118,12 @@ export default function AdminDashboardPage() {
     // Tarefas State
     const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
     const [taskForm, setTaskForm] = useState({ title: '', category: 'Matemática', priority: 'Média', dueDate: '' });
+
+    // Plan & Limits (Simulação)
+    const [currentPlan, setCurrentPlan] = useState<'semente' | 'ninho' | 'farol' | 'horizonte'>('semente');
+    const planLimits = { semente: 1, ninho: 3, farol: 6, horizonte: 9999 };
+    const aiLimits = { semente: 100, ninho: 300, farol: 600, horizonte: 2000 };
+    const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
 
     // Perfil do Aluno Modal State
     const [viewingProfile, setViewingProfile] = useState<Student | null>(null);
@@ -119,6 +143,19 @@ export default function AdminDashboardPage() {
     const handleSaveStudent = () => {
         if (!studentForm.name || !studentForm.age || !studentForm.grade) {
             toast.error("Preencha todos os campos do aluno.");
+            return;
+        }
+
+        // Verificação de Limite do Plano
+        if (!editingStudent && students.length >= planLimits[currentPlan]) {
+            toast.error(`Limite atingido! Seu plano atual permite apenas ${planLimits[currentPlan]} aluno(s).`, {
+                description: "Faça o upgrade para o Plano Ninho e adicione até 3 filhos!",
+                action: {
+                    label: "Upgrade",
+                    onClick: () => setIsUpgradeModalOpen(true)
+                },
+                duration: 5000,
+            });
             return;
         }
 
@@ -235,14 +272,45 @@ export default function AdminDashboardPage() {
                 {/* Saudação Pessoal */}
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Olá, Izabel! 👋</h1>
+                        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Olá! 👋</h1>
                         <p className="text-slate-500 mt-2 text-lg">
-                            Que bom ter você por aqui. O painel da Família Silva está pronto.
+                            Bem-vindo ao seu novo painel educacional.
                         </p>
                     </div>
                 </div>
 
-                {/* Banner de Novidades Controlado pelo Super Admin (Cor Dark/Acessível + Botão Fechar) */}
+                {students.length === 0 ? (
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex flex-col items-center justify-center py-20 text-center bg-white border border-dashed border-slate-200 rounded-[40px] shadow-sm"
+                    >
+                        <div className="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-600 mb-8">
+                            <Plus size={48} />
+                        </div>
+                        <h2 className="text-3xl font-extrabold text-[#0B0B0B] mb-4">Seu painel está quase pronto!</h2>
+                        <p className="text-xl text-slate-500 mb-12 max-w-md font-medium">
+                            Para começar, adicione seu primeiro filho ou aluno para organizarmos a jornada dele.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <Button 
+                                onClick={openAddStudentModal}
+                                className="h-16 px-12 text-lg font-bold bg-[#0E625E] hover:bg-[#C8B289] hover:text-[#0E625E] text-white rounded-2xl shadow-lg transition-all"
+                            >
+                                <UserPlus className="mr-2" /> Adicionar Primeiro Filho
+                            </Button>
+                            <Button 
+                                variant="outline"
+                                onClick={() => setIsChatOpen(true)}
+                                className="h-16 px-12 text-lg font-bold border-slate-200 text-slate-700 rounded-2xl hover:bg-slate-50 transition-all"
+                            >
+                                <Bot className="mr-2" /> Falar com Assistente IA
+                            </Button>
+                        </div>
+                    </motion.div>
+                ) : (
+                    <>
+                        {/* Banner de Novidades Controlado pelo Super Admin (Cor Dark/Acessível + Botão Fechar) */}
                 {showBanner && (
                     <div className="bg-slate-900 rounded-2xl p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-start md:items-center gap-6 relative overflow-hidden pr-12">
                         <button
@@ -325,11 +393,19 @@ export default function AdminDashboardPage() {
                         <CardContent className="p-6 flex flex-col h-full justify-between items-start relative z-10">
                             <div className="flex justify-between w-full items-start mb-4">
                                 <div className="bg-purple-400/30 p-3 rounded-xl"><Bot className="h-6 w-6 text-purple-100" /></div>
-                                <span className="text-xs font-bold text-purple-900 bg-purple-100 px-2 py-1 rounded-full shadow-sm">42/500 Tokens</span>
+                                <span className="text-[10px] font-bold text-purple-100 bg-purple-500/30 border border-purple-400/30 px-2 py-1 rounded-full uppercase tracking-tight">IA Créditos</span>
                             </div>
-                            <div>
-                                <h3 className="text-xl font-bold text-white mb-1">Chat IA Pedagógico</h3>
-                                <p className="text-xs font-medium text-purple-200">Dúvidas? Montar plano de aula? A IA te ajuda num instante.</p>
+                            <div className="w-full">
+                                <h3 className="text-xl font-bold text-white mb-4">Chat Pedagógico</h3>
+                                <div className="space-y-2">
+                                    <div className="flex justify-between text-[10px] font-black text-purple-200 uppercase tracking-tighter">
+                                        <span>42 de {aiLimits[currentPlan]} mensagens</span>
+                                        <span>{Math.round((42 / aiLimits[currentPlan]) * 100)}%</span>
+                                    </div>
+                                    <div className="h-2 w-full bg-purple-900/50 rounded-full overflow-hidden">
+                                        <div className="h-full bg-purple-400 rounded-full" style={{ width: `${(42 / aiLimits[currentPlan]) * 100}%` }}></div>
+                                    </div>
+                                </div>
                             </div>
                         </CardContent>
                     </Card>
@@ -593,6 +669,8 @@ export default function AdminDashboardPage() {
                     </Card>
                 </div>
 
+                    </>
+                )}
             </div>
 
             {/* Modal/Widget Chat IA */}
@@ -819,12 +897,67 @@ export default function AdminDashboardPage() {
                         </div>
 
                         {/* Footer */}
-                        <div className="bg-slate-50 border-t border-slate-100 p-4 flex justify-end gap-3">
-                            <Button variant="ghost" onClick={() => setIsStudentModalOpen(false)} className="text-slate-600 hover:text-slate-800">Cancelar</Button>
-                            <Button onClick={handleSaveStudent} className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-sm" disabled={!studentForm.name || !studentForm.grade || !studentForm.age || isSavingStudent}>
-                                {isSavingStudent ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
-                                {isSavingStudent ? "Salvando..." : editingStudent ? "Salvar Alterações" : "Cadastrar Aluno"}
+                        <div className="bg-slate-50 border-t border-slate-100 p-6 flex flex-col sm:flex-row gap-3">
+                            <Button
+                                variant="outline"
+                                className="flex-1 bg-white border-slate-200 text-slate-600 font-bold h-12 rounded-xl"
+                                onClick={() => setIsStudentModalOpen(false)}
+                                disabled={isSavingStudent}
+                            >
+                                Cancelar
                             </Button>
+                            <Button
+                                className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white font-bold h-12 rounded-xl shadow-md shadow-emerald-100 border-none"
+                                onClick={handleSaveStudent}
+                                disabled={isSavingStudent}
+                            >
+                                {isSavingStudent ? (
+                                    <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Salvando...</>
+                                ) : (
+                                    editingStudent ? 'Atualizar Aluno' : 'Salvar Aluno'
+                                )}
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Modal de Upgrade */}
+            {isUpgradeModalOpen && (
+                <div className="fixed inset-0 z-[110] flex justify-center items-center bg-slate-900/60 backdrop-blur-md p-4 transition-all">
+                    <div className="bg-white w-full max-w-2xl rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-slate-100 animate-in zoom-in-95 duration-200">
+                        <div className="p-8 text-center bg-emerald-50 flex flex-col items-center">
+                            <div className="bg-white p-4 rounded-3xl shadow-xl mb-6 border border-emerald-100">
+                                <Sparkles size={40} className="text-[#C8B289]" />
+                            </div>
+                            <h2 className="text-3xl font-black text-slate-900 mb-4">Sua família cresceu! 🌱</h2>
+                            <p className="text-slate-600 font-medium max-w-sm mx-auto mb-8">
+                                O Plano Semente é ideal para começar, mas para gerenciar mais filhos você precisa de um plano maior.
+                            </p>
+                            
+                            <div className="grid sm:grid-cols-2 gap-4 w-full text-left">
+                                <div className="bg-white border-2 border-[#0E625E] rounded-2xl p-6 relative">
+                                    <div className="absolute -top-3 right-4 bg-[#0E625E] text-white text-[9px] font-black px-3 py-1 rounded-full uppercase">Recomendado</div>
+                                    <h3 className="font-bold text-slate-900 text-lg mb-1">Plano Ninho</h3>
+                                    <p className="text-xs text-slate-500 mb-4 font-medium uppercase tracking-tighter">Até 3 alunos ativos</p>
+                                    <div className="mb-6">
+                                        <div className="text-2xl font-black text-[#0E625E]">R$ 49,90<span className="text-xs font-bold text-slate-400">/mês</span></div>
+                                        <div className="text-[10px] text-emerald-600 font-bold uppercase tracking-tight">Ou R$ 499,00 no Anual (PIX)</div>
+                                    </div>
+                                    <Button className="w-full bg-[#0E625E] hover:bg-[#C8B289] text-white font-bold rounded-xl" onClick={() => { setCurrentPlan('ninho'); setIsUpgradeModalOpen(false); toast.success("Plano atualizado para Ninho!"); }}>Upgrade Agora</Button>
+                                </div>
+                                <div className="bg-white border border-slate-200 rounded-2xl p-6 hover:border-emerald-200 transition-colors">
+                                    <h3 className="font-bold text-slate-900 text-lg mb-1">Plano Farol</h3>
+                                    <p className="text-xs text-slate-500 mb-4 font-medium uppercase tracking-tighter">Até 6 alunos ativos</p>
+                                    <div className="mb-6">
+                                        <div className="text-2xl font-black text-slate-800">R$ 69,90<span className="text-xs font-bold text-slate-400">/mês</span></div>
+                                        <div className="text-[10px] text-slate-400 font-bold uppercase tracking-tight">Ou R$ 699,00 no Anual</div>
+                                    </div>
+                                    <Button variant="outline" className="w-full border-slate-200 text-[#0E625E] font-bold rounded-xl" onClick={() => { setCurrentPlan('farol'); setIsUpgradeModalOpen(false); toast.success("Plano atualizado para Farol!"); }}>Ver Detalhes</Button>
+                                </div>
+                            </div>
+                            
+                            <button onClick={() => setIsUpgradeModalOpen(false)} className="mt-8 text-slate-400 hover:text-slate-600 text-sm font-bold uppercase tracking-widest transition-colors">Talvez mais tarde</button>
                         </div>
                     </div>
                 </div>

@@ -25,11 +25,18 @@ import { translations } from "@/lib/translations";
 import { Header } from "@/components/Header";
 
 export default function LandingPage() {
-  const [lang, setLang] = useState<"pt" | "en">("pt");
+  const [lang, setLang] = useState<"pt" | "en" | "es">("pt");
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showCookies, setShowCookies] = useState(false);
   const [email, setEmail] = useState("");
   const t = translations[lang];
+
+  useEffect(() => {
+    const savedLang = localStorage.getItem("language") as "pt" | "en" | "es";
+    if (savedLang && ["pt", "en", "es"].includes(savedLang) && savedLang !== lang) {
+      setLang(savedLang);
+    }
+  }, [lang]);
 
   useEffect(() => {
     const consent = localStorage.getItem("wasiflow-consent-v4");
@@ -37,9 +44,7 @@ export default function LandingPage() {
        const timer = setTimeout(() => setShowCookies(true), 1500);
        return () => clearTimeout(timer);
     }
-  }, []);
-
-  useEffect(() => {
+  }, []);  useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) entry.target.classList.add("active");
@@ -72,9 +77,7 @@ export default function LandingPage() {
               <span className="font-hand text-[#D4C19D] text-6xl md:text-8xl lg:text-[100px] font-normal leading-none block md:inline-block mt-4 md:mt-0">{t.hero.titleAccent}</span>
             </h1>
             
-            <p className="fade-up text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-16 leading-relaxed">
-              {t.hero.desc}
-            </p>
+            <p className="fade-up text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-16 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.hero.desc }} />
             
             <div className="fade-up flex flex-col sm:flex-row gap-5 justify-center items-center mb-20">
                <Link href="/register">
@@ -82,11 +85,7 @@ export default function LandingPage() {
                    {t.hero.ctaPrimary} <ChevronRight size={20} />
                  </button>
                </Link>
-               <Link href="#features">
-                 <button className="bg-white text-[#0E625E] border border-[#E8E8E8] h-14 px-10 rounded-lg text-lg font-bold hover:border-[#D4C19D] hover:text-[#D4C19D] transition-all">
-                   {t.hero.ctaSecondary}
-                 </button>
-               </Link>
+
             </div>
 
             {/* Main Human Image (Smaller/Compact) */}
@@ -132,130 +131,137 @@ export default function LandingPage() {
 
             {/* Feature Splits */}
             <div className="space-y-20 md:space-y-24">
-              {/* Split 1: Evidence Journal */}
-              <div className="reveal-on-scroll flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-                 <div className="flex-1 space-y-6">
-                    <div className="bg-[#BAE6FD]/40 p-4 rounded-xl w-fit text-[#0E625E]"><Zap size={40} /></div>
-                    <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
-                      {t.features.cards.diary.title}
-                    </h3>
-                    <p className="text-xl text-slate-500 font-medium leading-relaxed">
-                      {t.features.cards.diary.desc}
-                    </p>
-                    <ul className="space-y-4">
-                       {["IA que narra vivências", "Organização automática", "Exportação em um clique"].map((item, i) => (
-                         <li key={i} className="flex items-center gap-3 text-slate-700 font-bold">
-                            <CheckCircle2 size={20} className="text-[#0E625E]" /> {item}
-                         </li>
-                       ))}
-                    </ul>
-                 </div>
-                 <div className="flex-1 w-full flex items-center justify-center">
-                    <div className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white rotate-2 transition-transform hover:rotate-0 duration-500">
-                       <Image src="/homeschooling_basics_v2_1773503526173.png" alt="Homeschooling basics" fill className="object-cover" />
-                    </div>
-                 </div>
-              </div>
-
-                {/* Split 2: Legal Reports */}
-                <div className="reveal-on-scroll flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+               {/* Split 1: Evidence Journal */}
+               <div className="reveal-on-scroll flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
                   <div className="flex-1 space-y-6">
-                     <div className="bg-[#D4C19D]/40 p-4 rounded-xl w-fit text-white"><Shield size={40} className="text-[#0B0B0B]" /></div>
+                     <div className="bg-[#BAE6FD]/40 p-4 rounded-xl w-fit text-[#0E625E]"><Zap size={40} /></div>
                      <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
-                        {t.features.cards.juridical.title}
+                       {t.features.cards.diary.title}
                      </h3>
                      <p className="text-xl text-slate-500 font-medium leading-relaxed">
-                        {t.features.cards.juridical.desc}
+                       {t.features.cards.diary.desc}
                      </p>
-                    <ul className="space-y-4">
-                       {["Estrutura BNCC", "Formatos aceitos", "Histórico contínuo"].map((item, i) => (
-                         <li key={i} className="flex items-center gap-3 text-slate-700 font-bold">
-                            <CheckCircle2 size={20} className="text-[#0E625E]" /> {item}
-                         </li>
-                       ))}
-                    </ul>
-                 </div>
+                     <ul className="space-y-4">
+                        {["Organização automática", "Exportação em um clique", "relatório em PDF quando você precisar"].map((item, i) => (
+                          <li key={i} className="flex items-center gap-3 text-slate-700 font-bold">
+                             <CheckCircle2 size={20} className="text-[#0E625E]" /> {item}
+                          </li>
+                        ))}
+                     </ul>
+                  </div>
                   <div className="flex-1 w-full flex items-center justify-center">
-                    <div className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white -rotate-2 transition-transform hover:rotate-0 duration-500">
-                       <Image src="/evidence_journal_1773430210790.png" alt="Relatórios Jurídicos" fill className="object-cover" />
+                    <div className="w-full relative aspect-square max-w-[450px] rounded-[32px] overflow-hidden">
+                       <Image src="/images/diariodeevidencias.png" alt="Diário de Evidências" fill className="object-cover drop-shadow-2xl rounded-[32px]" />
                     </div>
-                 </div>
-              </div>
+                  </div>
+               </div>
 
-              {/* Split 3: AI Assistant */}
-              <div className="reveal-on-scroll flex flex-col lg:flex-row items-center gap-16 lg:gap-32">
-                 <div className="flex-1 space-y-8">
-                    <div className="bg-[#0E625E]/10 p-4 rounded-xl w-fit text-[#0E625E]"><Brain size={40} /></div>
-                    <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
-                       {t.features.cards.ai.title}
-                    </h3>
-                    <p className="text-xl text-slate-500 font-medium leading-relaxed">
-                       {t.features.cards.ai.desc}
-                    </p>
-                    <ul className="space-y-4">
-                       {["Criação de planos de aula", "Dúvidas pedagógicas", "Sugestão de atividades"].map((item, i) => (
-                         <li key={i} className="flex items-center gap-3 text-slate-700 font-bold">
-                            <CheckCircle2 size={20} className="text-[#0E625E]" /> {item}
-                         </li>
-                       ))}
-                    </ul>
-                 </div>
-                   <div className="flex-1 w-full flex items-center justify-center relative">
-                     {/* Mascot Mask Overlay */}
-                     <div className="absolute -left-8 -bottom-8 w-48 h-48 z-10 drop-shadow-2xl transition-transform hover:scale-110 duration-300">
-                        <Image src="/wasiflow_mascot.png" alt="Wasiflow Mascot" fill className="object-contain" />
-                     </div>
-                     <div className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white rotate-1 transition-transform hover:rotate-0 duration-500 relative z-0">
-                        <Image src="/ai_assistant_minimalist_chat.png" alt="IA Assistant" fill className="object-cover" />
+                 {/* Split 2: Legal Reports */}
+                 <div className="reveal-on-scroll flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+                   <div className="flex-1 space-y-6">
+                      <div className="bg-[#C8B289]/40 p-4 rounded-xl w-fit text-white"><Shield size={40} className="text-[#0B0B0B]" /></div>
+                      <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
+                         {t.features.cards.juridical.title}
+                      </h3>
+                      <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                         {t.features.cards.juridical.desc}
+                      </p>
+                  </div>
+                   <div className="flex-1 w-full flex items-center justify-center">
+                    <div className="w-full relative aspect-square max-w-[450px] rounded-[32px] overflow-hidden">
+                       <Image src="/images/peace-001.png" alt="Segurança Jurídica" fill className="object-cover drop-shadow-2xl rounded-[32px]" />
+                    </div>
+                  </div>
+               </div>
+
+               {/* Split 3: AI Assistant */}
+               <div className="reveal-on-scroll flex flex-col lg:flex-row items-center gap-16 lg:gap-32">
+                  <div className="flex-1 space-y-8">
+                     <div className="bg-[#0E625E]/10 p-4 rounded-xl w-fit text-[#0E625E]"><Brain size={40} /></div>
+                     <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
+                        {t.features.cards.ai.title} <span className="text-4xl font-hand text-[#C8B289] font-normal block mt-1">Conversa com nosso assistente 24/7</span>
+                     </h3>
+                     <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                        {t.features.cards.ai.desc}
+                     </p>
+                     <ul className="space-y-4">
+                        {["Assistente treinado com a BNCC", "Criação de planos de aula", "Dúvidas pedagógicas", "Sugestão de atividades", "E mais!"].map((item, i) => (
+                          <li key={i} className="flex items-center gap-3 text-slate-700 font-bold">
+                             <CheckCircle2 size={20} className="text-[#0E625E]" /> {item}
+                          </li>
+                        ))}
+                     </ul>
+                  </div>
+                    <div className="flex-1 w-full flex items-center justify-center relative">
+                       <Image src="/images/chat-ia-assitant-2.png" alt="IA Assistant Chat" width={450} height={450} className="object-contain drop-shadow-2xl rounded-[32px]" />
+                    </div>
+               </div>
+
+                {/* Split 4: Activity Tracking */}
+                <div className="reveal-on-scroll flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+                  <div className="flex-1 space-y-6">
+                     <div className="bg-[#BAE6FD]/40 p-4 rounded-xl w-fit text-[#0E625E]"><LayoutDashboard size={40} /></div>
+                     <span className="text-[#0E625E] font-bold uppercase tracking-widest text-xs">{t.features.cards.tracking.tag}</span>
+                     <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
+                        {t.features.cards.tracking.title}
+                     </h3>
+                     <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                        {t.features.cards.tracking.desc}
+                     </p>
+                     <div className="pt-4">
+                        <div className="flex items-center gap-2 text-[#0B0B0B] font-extrabold">
+                           <CheckCircle2 className="text-[#0E625E]" /> Foco na simplicidade e no controle dos pais
+                        </div>
                      </div>
                   </div>
-              </div>
+                  <div className="flex-1 w-full flex items-center justify-center relative">
+                     <Image src="/images/simple-manag-003.png" alt="Gestão de Atividades" width={450} height={450} className="object-contain drop-shadow-2xl rounded-[32px]" />
+                  </div>
+               </div>
 
-               {/* Split 4: Activity Tracking */}
-               <div className="reveal-on-scroll flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
-                 <div className="flex-1 space-y-6">
-                    <div className="bg-[#BAE6FD]/40 p-4 rounded-xl w-fit text-[#0E625E]"><LayoutDashboard size={40} /></div>
-                    <span className="text-[#0E625E] font-bold uppercase tracking-widest text-xs">{t.features.cards.tracking.tag}</span>
-                    <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
-                       {t.features.cards.tracking.title}
-                    </h3>
-                    <p className="text-xl text-slate-500 font-medium leading-relaxed">
-                       {t.features.cards.tracking.desc}
-                    </p>
-                    <div className="pt-4">
-                       <div className="flex items-center gap-2 text-[#0B0B0B] font-extrabold">
-                          <CheckCircle2 className="text-[#0E625E]" /> Foco na simplicidade e no controle dos pais
+                {/* Split 5: Gamification */}
+                <div className="reveal-on-scroll flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                  <div className="flex-1 space-y-6">
+                     <div className="bg-[#C8B289]/40 p-4 rounded-xl w-fit text-[#0E625E]"><Gamepad size={40} /></div>
+                     <span className="text-[#0E625E] font-bold uppercase tracking-widest text-xs">{t.features.gamification.tag}</span>
+                     <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
+                        {t.features.gamification.title}
+                     </h3>
+                     <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                        {t.features.gamification.desc}
+                     </p>
+                      <ul className="space-y-4 pt-4">
+                        {["Que tal oferecer um passeio ao concluir as tarefas da semana?", "Ou quem sabe um presente desejado caso vençam as lições de matemática no prazo?"].map((item, i) => (
+                          <li key={i} className="flex items-start gap-3 text-slate-700 font-bold">
+                             <CheckCircle2 size={20} className="text-[#0E625E] shrink-0 mt-0.5" /> <span className="leading-snug">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                  </div>
+                  <div className="flex-1 w-full flex items-center justify-center relative">
+                    {/* Animated Game Symbols & Stars */}
+                    <div className="absolute inset-0 pointer-events-none z-10">
+                       <div className="reveal-on-scroll absolute top-0 -left-4 [transition-delay:200ms]">
+                          <Sparkles className="text-[#D4C19D] animate-pulse" size={48} />
+                       </div>
+                       <div className="reveal-on-scroll absolute bottom-1/4 -right-6 [transition-delay:400ms]">
+                          <Gamepad className="text-[#0E625E] -rotate-12 opacity-50" size={56} />
+                       </div>
+                       <div className="reveal-on-scroll absolute -top-8 right-12 [transition-delay:600ms]">
+                          <Sparkles className="text-[#C8B289] animate-bounce" size={40} />
+                       </div>
+                       <div className="reveal-on-scroll absolute bottom-0 left-1/4 [transition-delay:800ms]">
+                          <div className="bg-[#BAE6FD] p-3 rounded-full shadow-lg">
+                             <Zap className="text-[#0E625E]" size={24} />
+                          </div>
                        </div>
                     </div>
-                 </div>
-                 <div className="flex-1 w-full flex items-center justify-center">
-                    <div className="w-full h-full rounded-[40px] overflow-hidden shadow-2xl border border-white transition-all duration-500 hover:scale-[1.02]">
-                       <Image src="/activity_tracking_clean_1773438984929.png" alt="Activity Tracking" fill className="object-cover" />
+                    
+                    <div className="w-full relative aspect-square max-w-[450px] rounded-[32px] overflow-hidden">
+                       <Image src="/images/gamefication-2.png" alt="Gamificação" fill className="object-cover drop-shadow-2xl rounded-[32px]" />
                     </div>
-                 </div>
-              </div>
-
-               {/* Split 5: Gamification */}
-               <div className="reveal-on-scroll flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-                 <div className="flex-1 space-y-6">
-                    <div className="bg-[#D4C19D]/40 p-4 rounded-xl w-fit text-[#0E625E]"><Gamepad size={40} /></div>
-                    <span className="text-[#0E625E] font-bold uppercase tracking-widest text-xs">{t.features.gamification.tag}</span>
-                    <h3 className="text-4xl font-extrabold text-[#0E625E] tracking-tight leading-tight">
-                       {t.features.gamification.title}
-                    </h3>
-                    <p className="text-xl text-slate-500 font-medium leading-relaxed">
-                       {t.features.gamification.desc}
-                    </p>
-                    <button className="bg-[#0E625E] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#D4C19D] transition-all">
-                       {t.features.gamification.cta}
-                    </button>
-                 </div>
-                 <div className="flex-1 w-full flex items-center justify-center">
-                    <div className="w-full h-full rounded-[40px] overflow-hidden shadow-2xl border border-white transform rotate-2 transition-transform hover:rotate-0 duration-500">
-                       <Image src="/gamification_reports_check_1773436412931.png" alt="Gamification" fill className="object-cover" />
-                    </div>
-                 </div>
-              </div>
+                  </div>
+               </div>
 
                {/* Split 6: Collaboration */}
                <div className="reveal-on-scroll flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
@@ -287,7 +293,7 @@ export default function LandingPage() {
         </section>
 
          {/* Articles Section */}
-         <section id="blog" className="py-32 bg-white border-t border-[#FAFAFA]">
+         <section id="conhecimento" className="py-32 bg-white border-t border-[#FAFAFA]">
            <div className="max-w-[1240px] mx-auto px-6">
               <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                  <div className="max-w-2xl">
@@ -412,7 +418,7 @@ export default function LandingPage() {
               <div className="mb-8 flex justify-center items-center">
                 <div className="relative w-40 h-12">
                   <Image 
-                    src="/wasiflow_logo.svg" 
+                    src="/wasiflow_logo_1.png" 
                     alt="Wasiflow Logo" 
                     fill
                     className="object-contain"

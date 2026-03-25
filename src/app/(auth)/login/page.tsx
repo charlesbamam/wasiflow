@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,35 +17,42 @@ import {
 export default function LoginPage() {
     return (
         <div className="min-h-screen grid lg:grid-cols-2 bg-[#FAFAFA]">
-            <div className="flex flex-col justify-center items-center p-8">
-                <Link href="/" className="mb-12 absolute top-8 left-8 text-emerald-700 font-bold text-2xl tracking-tight">
-                    Wasiflow
+            <div className="flex flex-col justify-center items-center p-8 relative">
+                <Link href="/" className="mb-12 absolute top-8 left-8">
+                    <div className="relative w-40 h-10">
+                        <Image 
+                            src="/wasiflow_logo_1.png" 
+                            alt="Wasiflow Logo" 
+                            fill
+                            className="object-contain"
+                        />
+                    </div>
                 </Link>
 
-                <div className="w-full max-w-md">
-                    <Card className="border-none shadow-lg bg-white/80 backdrop-blur-sm rounded-2xl">
-                        <CardHeader className="space-y-2">
-                            <CardTitle className="text-3xl font-bold text-slate-900 tracking-tight">Login</CardTitle>
-                            <CardDescription className="text-base text-slate-500">
-                                Acesse seu painel familiar Wasiflow.
+                <div className="w-full max-w-md mt-16 lg:mt-0">
+                    <Card className="border-none shadow-lg bg-white/50 backdrop-blur-md rounded-[32px]">
+                        <CardHeader className="space-y-1 text-center pb-8">
+                            <CardTitle className="text-4xl font-extrabold text-[#0B0B0B] tracking-tight">Login</CardTitle>
+                            <CardDescription className="text-lg text-slate-500 font-medium pt-2">
+                                Acesse seu painel Wasiflow.
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <div className="space-y-5">
+                            <div className="space-y-6">
                                 <div className="space-y-2">
-                                    <Label htmlFor="email" className="text-slate-700 font-medium">E-mail</Label>
+                                    <Label htmlFor="email" className="text-slate-700 font-bold uppercase tracking-wider text-[11px]">E-mail</Label>
                                     <Input
                                         id="email"
                                         type="email"
-                                        placeholder="voce@familia.com"
+                                        placeholder="voce@email.com"
                                         required
-                                        className="h-12 border-slate-200 focus-visible:ring-emerald-500"
+                                        className="h-14 border border-slate-200 bg-white/50 rounded-2xl focus-visible:ring-emerald-500 text-lg"
                                     />
                                 </div>
                                 <div className="space-y-2">
                                     <div className="flex items-center justify-between">
-                                        <Label htmlFor="password" className="text-slate-700 font-medium">Senha</Label>
-                                        <Link href="#" className="text-sm font-medium text-emerald-600 hover:text-emerald-700 hover:underline">
+                                        <Label htmlFor="password" className="text-slate-700 font-bold uppercase tracking-wider text-[11px]">Senha</Label>
+                                        <Link href="#" className="text-sm font-bold text-[#0E625E] hover:text-[#C8B289] hover:underline transition-colors">
                                             Esqueceu a senha?
                                         </Link>
                                     </div>
@@ -52,25 +60,28 @@ export default function LoginPage() {
                                         id="password"
                                         type="password"
                                         required
-                                        className="h-12 border-slate-200 focus-visible:ring-emerald-500"
+                                        className="h-14 border border-slate-200 bg-white/50 rounded-2xl focus-visible:ring-emerald-500"
                                     />
                                 </div>
-                                <div className="relative">
+                                
+                                <Link href="/admin" className="block w-full">
+                                    <Button className="w-full h-14 text-lg font-bold bg-[#0E625E] hover:bg-[#C8B289] hover:text-[#0E625E] text-white rounded-2xl mt-4 shadow-xl shadow-emerald-900/10 transition-all">
+                                        Entrar no Painel
+                                    </Button>
+                                </Link>
+
+                                <div className="relative py-4">
                                     <div className="absolute inset-0 flex items-center">
-                                        <span className="w-full border-t border-slate-200" />
+                                        <span className="w-full border-t border-slate-100" />
                                     </div>
-                                    <div className="relative flex justify-center text-xs uppercase">
-                                        <span className="bg-white px-2 text-slate-500 font-medium">Ou continue com</span>
+                                    <div className="relative flex justify-center text-[10px] uppercase tracking-widest font-bold">
+                                        <span className="bg-white/50 px-4 text-slate-400">Ou continue com</span>
                                     </div>
                                 </div>
 
                                 <Button
                                     variant="outline"
-                                    className="w-full h-12 border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold rounded-xl flex items-center justify-center gap-3 transition-all"
-                                    onClick={() => {
-                                        console.log("Iniciando login com Google...");
-                                        // TODO: Implementar lógica de OAuth
-                                    }}
+                                    className="w-full h-14 border-slate-100 hover:bg-slate-50 text-slate-700 font-bold rounded-2xl flex items-center justify-center gap-3 transition-all text-lg"
                                 >
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -80,31 +91,13 @@ export default function LoginPage() {
                                     </svg>
                                     Google
                                 </Button>
-
-                                <div className="space-y-3">
-                                    <p className="text-center text-[10px] uppercase tracking-widest font-bold text-slate-400">Paineis de Simulação</p>
-                                    <div className="grid grid-cols-2 gap-2">
-                                        <Link href="/admin">
-                                            <Button variant="outline" className="w-full text-xs border-slate-200 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 h-10">Tutor (Principal)</Button>
-                                        </Link>
-                                        <Link href="/assistant">
-                                            <Button variant="outline" className="w-full text-xs border-slate-200 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 h-10">Auxiliar</Button>
-                                        </Link>
-                                        <Link href="/student">
-                                            <Button variant="outline" className="w-full text-xs border-slate-200 hover:bg-pink-50 hover:text-pink-700 hover:border-pink-200 h-10">Aluno</Button>
-                                        </Link>
-                                        <Link href="/superadmin">
-                                            <Button variant="outline" className="w-full text-xs border-slate-200 hover:bg-purple-50 hover:text-purple-700 hover:border-purple-200 h-10">Super Admin</Button>
-                                        </Link>
-                                    </div>
-                                </div>
                             </div>
                         </CardContent>
                         <CardFooter className="flex flex-col space-y-4 text-center">
-                            <div className="text-sm text-slate-500 mt-4">
+                            <div className="text-sm text-slate-500 font-medium">
                                 Ainda não tem uma conta?{' '}
-                                <Link href="/register" className="text-emerald-600 font-semibold hover:underline">
-                                    Começar Grátis
+                                <Link href="/register" className="text-[#0E625E] font-bold hover:underline">
+                                    criar minha conta agora
                                 </Link>
                             </div>
                         </CardFooter>
@@ -112,29 +105,24 @@ export default function LoginPage() {
                 </div>
             </div>
 
-            <div className="hidden lg:flex flex-col justify-center bg-emerald-900 p-12 text-white relative overflow-hidden">
-                {/* Decorative background circle */}
-                <div className="absolute -top-32 -right-32 w-96 h-96 bg-emerald-800 rounded-full blur-3xl opacity-50"></div>
-                <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-emerald-700 rounded-full blur-3xl opacity-30"></div>
-
+            <div className="hidden lg:flex flex-col justify-center p-20 text-white relative overflow-hidden">
+                <Image 
+                    src="/login_hero.png" 
+                    alt="Login Hero" 
+                    fill 
+                    className="object-cover"
+                />
+                <div className="absolute inset-0 bg-emerald-950/70 backdrop-blur-[2px] z-0"></div>
+                
                 <div className="relative z-10 max-w-xl">
-                    <h2 className="text-4xl font-bold mb-6">Organize, Valide e Gamifique o Homeschooling.</h2>
-                    <p className="text-emerald-100 text-lg mb-8 leading-relaxed">
-                        Bem-vindo ao Wasiflow. Ajudamos tutores educadores a focar no que realmente importa: a jornada de aprendizado do aluno, deixando a gestão e a papelada com nosso sistema.
+                    <h2 className="text-5xl font-extrabold mb-8 tracking-tight leading-tight">Bem-vindo ao Wasiflow.</h2>
+                    <p className="text-emerald-50/90 text-xl mb-12 leading-relaxed font-medium">
+                        Ajudamos pais educadores a focar no que realmente importa: a jornada de aprendizado do seu filho em casa, ajudando você a cumprir o seu propósito para eles.
                     </p>
-                    <div className="space-y-4">
-                        <div className="flex items-center gap-3">
-                            <div className="h-2 w-2 bg-emerald-400 rounded-full"></div>
-                            <span className="text-emerald-50">Evidências aceitas pelas coordenações educacionais</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <div className="h-2 w-2 bg-emerald-400 rounded-full"></div>
-                            <span className="text-emerald-50">Resumos criados por Inteligência Artificial Pedagógica</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <div className="h-2 w-2 bg-emerald-400 rounded-full"></div>
-                            <span className="text-emerald-50">Isolamento total e seguro por painel familiar</span>
-                        </div>
+                    
+                    <div className="pt-8 flex items-center gap-4 text-emerald-200">
+                        <div className="w-12 h-0.5 bg-emerald-500"></div>
+                        <span className="font-bold tracking-[0.2em] text-xs uppercase">Seu parceiro no Homeschooling</span>
                     </div>
                 </div>
             </div>

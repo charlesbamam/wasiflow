@@ -23,7 +23,7 @@ export default function DashboardsLayout({
                     <Link href="/" className="flex items-center gap-2">
                         <div className="relative w-32 h-8">
                             <Image 
-                                src="/wasiflow_logo.svg" 
+                                src="/wasiflow_logo_1.png" 
                                 alt="Wasiflow Logo" 
                                 fill
                                 className="object-contain"
@@ -47,10 +47,6 @@ export default function DashboardsLayout({
                         <Link href="/student" className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-emerald-50 text-slate-700 hover:text-emerald-700">
                             <BookOpen size={18} />
                             Visão Aluno
-                        </Link>
-                        <Link href="/superadmin" className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-emerald-50 text-slate-700 hover:text-emerald-700">
-                            <Settings size={18} />
-                            Visão Super Admin
                         </Link>
                     </div>
 

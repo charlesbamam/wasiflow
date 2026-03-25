@@ -19,12 +19,12 @@ import { Header } from "@/components/Header";
 
 export default function ArtigoPage() {
   const { slug } = useParams();
-  const [lang, setLang] = useState<"pt" | "en">("pt");
+  const [lang, setLang] = useState<"pt" | "en" | "es">("pt");
   const t = translations[lang];
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("language") as "pt" | "en";
-    if (savedLang && savedLang !== lang) {
+    const savedLang = localStorage.getItem("language") as "pt" | "en" | "es";
+    if (savedLang && ["pt", "en", "es"].includes(savedLang) && savedLang !== lang) {
       setLang(savedLang);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,29 +79,63 @@ export default function ArtigoPage() {
           </div>
 
           <div className="prose prose-xl prose-slate max-w-none">
-            <p className="text-xl text-slate-600 leading-[1.8] font-medium mb-8">
+            <p className="text-xl text-slate-600 leading-[1.8] font-medium mb-12">
               {article.desc}
             </p>
             
-            <h2 className="text-2xl font-extrabold text-[#0B0B0B] mt-12 mb-6 uppercase tracking-tight">O que é importante considerar</h2>
-            <p className="text-lg text-slate-500 leading-[1.8] mb-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-            
-            <div className="bg-[#FAFAFA] border-l-4 border-[#0E625E] p-8 my-12 rounded-r-3xl">
-              <p className="text-xl font-bold italic text-[#0E625E]">
-                &quot;A educação domiciliária não é apenas sobre ensinar conteúdos, mas sobre cultivar o amor pelo aprendizado e a autonomia do estudante.&quot;
-              </p>
-            </div>
-
-            <p className="text-lg text-slate-500 leading-[1.8] mb-8">
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-
-            <h2 className="text-2xl font-extrabold text-[#0B0B0B] mt-12 mb-6 uppercase tracking-tight">Próximos passos</h2>
-            <p className="text-lg text-slate-500 leading-[1.8] mb-8">
-              Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
-            </p>
+            {article.fullContent ? (
+              <div className="space-y-10">
+                {article.fullContent.map((section: any, idx: number) => {
+                  if (section.type === "heading") {
+                    return (
+                      <h2 key={idx} className="text-3xl font-extrabold text-[#0B0B0B] mt-16 mb-8 uppercase tracking-tight font-sans border-l-4 border-[#0E625E] pl-6 py-2">
+                        {section.text}
+                      </h2>
+                    );
+                  }
+                  if (section.type === "link") {
+                    return (
+                      <div key={idx} className="my-6">
+                        <a 
+                          href={section.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-[#0E625E] font-bold underline hover:text-[#C8B289] transition-colors break-all"
+                        >
+                          {section.text}
+                        </a>
+                      </div>
+                    );
+                  }
+                  if (section.type === "quote") {
+                    return (
+                      <div key={idx} className="bg-[#FAFAFA] border-l-4 border-[#0E625E] p-10 my-12 rounded-r-3xl shadow-sm">
+                        <p className="text-2xl font-bold italic text-[#0E625E]">
+                           &quot;{section.text}&quot;
+                        </p>
+                      </div>
+                    );
+                  }
+                  return (
+                    <p key={idx} className="text-xl text-slate-500 leading-[2] mb-8 font-medium">
+                      {section.text}
+                    </p>
+                  );
+                })}
+              </div>
+            ) : (
+              <>
+                <h2 className="text-2xl font-extrabold text-[#0B0B0B] mt-12 mb-6 uppercase tracking-tight">O que é importante considerar</h2>
+                <p className="text-lg text-slate-500 leading-[1.8] mb-8">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <div className="bg-[#FAFAFA] border-l-4 border-[#0E625E] p-8 my-12 rounded-r-3xl">
+                  <p className="text-xl font-bold italic text-[#0E625E]">
+                    &quot;A educação domiciliária não é apenas sobre ensinar conteúdos, mas sobre cultivar o amor pelo aprendizado e a autonomia do estudante.&quot;
+                  </p>
+                </div>
+              </>
+            )}
           </div>
 
           {/* Share & Footer */}
@@ -114,7 +148,7 @@ export default function ArtigoPage() {
                 <button className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-[#0E625E] hover:text-white transition-all"><Linkedin size={18} /></button>
               </div>
             </div>
-            <Link href="/register" className="bg-[#0E625E] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#D4C19D] hover:text-[#0E625E] transition-all shadow-lg">
+            <Link href="/register" className="bg-[#0E625E] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#C8B289] hover:text-[#0E625E] transition-all shadow-lg">
               {lang === "pt" ? "Experimente Wasiflow" : "Try Wasiflow"}
             </Link>
           </div>
@@ -127,7 +161,7 @@ export default function ArtigoPage() {
           <Link href="/" className="inline-flex items-center gap-2 mb-8">
             <div className="relative w-40 h-10">
               <Image 
-                src="/wasiflow_logo.svg" 
+                src="/wasiflow_logo_1.png" 
                 alt="Wasiflow Logo" 
                 fill
                 className="object-contain"

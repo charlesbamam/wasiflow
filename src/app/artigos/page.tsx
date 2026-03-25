@@ -16,12 +16,12 @@ import { translations } from "@/lib/translations";
 import { Header } from "@/components/Header";
 
 export default function ArticlesPage() {
-  const [lang, setLang] = useState<"pt" | "en">("pt");
+  const [lang, setLang] = useState<"pt" | "en" | "es">("pt");
   const t = translations[lang];
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("language") as "pt" | "en";
-    if (savedLang && savedLang !== lang) {
+    const savedLang = localStorage.getItem("language") as "pt" | "en" | "es";
+    if (savedLang && ["pt", "en", "es"].includes(savedLang) && savedLang !== lang) {
       setLang(savedLang);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -97,7 +97,7 @@ export default function ArticlesPage() {
             <div className="mb-8 flex justify-center items-center">
               <div className="relative w-40 h-10">
                 <Image 
-                  src="/wasiflow_logo.svg" 
+                  src="/wasiflow_logo_1.png" 
                   alt="Wasiflow Logo" 
                   fill
                   className="object-contain"
