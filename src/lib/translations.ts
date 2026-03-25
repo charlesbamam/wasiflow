@@ -21,6 +21,7 @@ export const translations = {
         yearlySub: "Pagamento único",
         saveLabel: "Economize 20%",
         pixLabel: "Aceitamos PIX",
+        popularLabel: "Mais Popular",
         cta: "Assinar Agora",
         plans: {
           semente: {
@@ -277,7 +278,11 @@ export const translations = {
         yearly: "/year",
         monthlyLabel: "Monthly",
         yearlyLabel: "Yearly",
+        monthlySub: "Cancel anytime",
+        yearlySub: "One-time payment",
         saveLabel: "Save up to 25%",
+        pixLabel: "We accept PIX/Transfer",
+        popularLabel: "Most Popular",
         cta: "Subscribe Now",
         plans: {
           semente: {
@@ -495,7 +500,8 @@ export const translations = {
       monthlySub: "Cancela cuando quieras",
       yearlySub: "Pago único",
       saveLabel: "Ahorra un 20%",
-      pixLabel: "Aceptamos transferencias",
+      pixLabel: "Aceptamos PIX/Transferencia",
+      popularLabel: "Más Popular",
       cta: "Suscribirse Ahora",
       plans: {
         semente: {
@@ -510,7 +516,7 @@ export const translations = {
           priceMonthly: "49,90",
           priceYearly: "499,00",
           desc: "El plan favorito para 3 hijos.",
-          features: ["Hasta 3 Alunos", "300 Mensagens IA/mês", "Todo lo de Semilla", "Informes BNCC", "Soporte Prioritario"]
+          features: ["Hasta 3 Alumnos", "300 Mensajes IA/mes", "Todo lo de Semilla", "Informes BNCC", "Soporte Prioritario"]
         },
         farol: {
           name: "Plan Faro",

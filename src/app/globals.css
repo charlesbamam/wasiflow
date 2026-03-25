@@ -99,3 +99,8 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.bg-grid-pattern {
+  background-size: 22px 22px;
+  background-image: radial-gradient(rgba(212, 193, 157, 0.5) 1.2px, transparent 1.2px);
+}

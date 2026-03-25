@@ -29,6 +29,7 @@ export default function LandingPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showCookies, setShowCookies] = useState(false);
   const [email, setEmail] = useState("");
+  const [isYearly, setIsYearly] = useState(false);
   const t = translations[lang];
 
   useEffect(() => {
@@ -64,9 +65,14 @@ export default function LandingPage() {
     <div className="flex flex-col min-h-screen bg-white font-sans selection:bg-[#BAE6FD] selection:text-[#0E625E]">
       <Header lang={lang} setLang={setLang} />
 
-      <main className="pt-20">
-        {/* Hero Section */}
-        <section id="product" className="max-w-[1240px] mx-auto px-6 py-24 md:py-32 text-center">
+      <main className="pt-20 relative">
+        <div className="relative overflow-hidden">
+          {/* Grid Background - Fading at hero end */}
+          {/* Grid Background - Fading earlier (around the second line of title) */}
+          <div className="absolute inset-0 bg-grid-pattern [mask-image:linear-gradient(to_bottom,#000_15%,transparent_55%)] pointer-events-none z-0" />
+          
+          {/* Hero Section */}
+          <section id="product" className="max-w-[1240px] mx-auto px-6 py-24 md:py-32 text-center relative z-10">
             <div className="fade-up inline-flex items-center gap-2 bg-[#0E625E]/5 text-[#0E625E] border border-[#0E625E]/10 px-4 py-1.5 rounded-full text-[11px] font-bold tracking-wider mb-10 uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-[#0E625E] animate-pulse" />
               {t.hero.badge}
@@ -85,7 +91,6 @@ export default function LandingPage() {
                    {t.hero.ctaPrimary} <ChevronRight size={20} />
                  </button>
                </Link>
-
             </div>
 
             {/* Main Human Image (Smaller/Compact) */}
@@ -117,7 +122,8 @@ export default function LandingPage() {
                 </div>
               </div>
             </div>
-        </section>
+          </section>
+        </div>
 
         {/* Dynamic Features Grid */}
         <section id="features" className="bg-[#F0F9F9]/50 border-y border-slate-100 py-32 overflow-hidden">
@@ -347,7 +353,94 @@ export default function LandingPage() {
            </div>
          </section>
 
-         {/* FAQ Expanded */}
+ 
+        {/* Pricing Section */}
+        <section id="pricing" className="py-32 bg-white">
+          <div className="max-w-[1240px] mx-auto px-6">
+            <div className="reveal-on-scroll text-center mb-16">
+              <span className="text-[#0E625E] font-bold uppercase tracking-[0.2em] text-[11px] mb-4 block">{t.pricing.tag}</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#0B0B0B] mb-6">
+                {t.pricing.title}
+              </h2>
+              <p className="text-xl text-slate-500 font-medium max-w-2xl mx-auto mb-12">
+                {t.pricing.subtitle}
+              </p>
+
+              {/* Toggle */}
+              <div className="flex items-center justify-center gap-4 mb-16">
+                <span className={`text-sm font-bold ${!isYearly ? "text-[#0E625E]" : "text-slate-400"}`}>{t.pricing.monthlyLabel}</span>
+                <button 
+                  onClick={() => setIsYearly(!isYearly)}
+                  className="w-14 h-7 bg-slate-100 rounded-full relative p-1 transition-all"
+                >
+                  <div className={`w-5 h-5 bg-[#0E625E] rounded-full transition-all ${isYearly ? "translate-x-7" : "translate-x-0"}`} />
+                </button>
+                <span className={`text-sm font-bold ${isYearly ? "text-[#0E625E]" : "text-slate-400"}`}>{t.pricing.yearlyLabel}</span>
+                <span className="bg-[#BAE6FD] text-[#0E625E] text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ml-2">
+                  {t.pricing.saveLabel}
+                </span>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch pt-12">
+              {Object.entries(t.pricing.plans).map(([key, plan]: [string, any], i) => (
+                <div 
+                  key={key}
+                  className={`reveal-on-scroll relative group bg-white border ${key === "ninho" ? "border-[#0E625E] shadow-[0_32px_64px_-16px_rgba(14,98,94,0.15)] ring-1 ring-[#0E625E] z-10" : "border-[#E8E8E8] shadow-sm"} px-8 py-10 rounded-[40px] flex flex-col transition-all duration-500 hover:shadow-2xl h-full min-h-[660px]`}
+                  style={{ transitionDelay: `${i * 100}ms` }}
+                >
+                  {key === "ninho" && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#0E625E] text-white text-[10px] font-black px-6 py-2.5 rounded-full uppercase tracking-[0.25em] shadow-xl whitespace-nowrap z-20">
+                      {t.pricing.popularLabel}
+                    </div>
+                  )}
+                  
+                  <div className="flex-1 flex flex-col h-full">
+                    <h3 className="text-xl font-extrabold text-[#0B0B0B] mb-2">{plan.name}</h3>
+                    <p className="text-slate-500 font-medium text-sm mb-12 leading-relaxed line-clamp-2 h-10">{plan.desc}</p>
+                    
+                    <div className="mb-10 items-baseline gap-1 flex flex-wrap">
+                      <span className="text-slate-400 font-bold text-base mt-2">R$</span>
+                      <span className="text-4xl md:text-[44px] font-black text-[#0B0B0B] tracking-tighter">
+                        {isYearly ? plan.priceYearly : plan.priceMonthly}
+                      </span>
+                      <span className="text-slate-400 font-bold text-sm">
+                        {isYearly ? t.pricing.yearly : t.pricing.monthly}
+                      </span>
+                    </div>
+
+                    <div className="w-full h-[1px] bg-slate-50 mb-8" />
+
+                    <ul className="space-y-4 mb-10 flex-1">
+                      {plan.features.map((feature: string, idx: number) => (
+                        <li key={idx} className="flex items-start gap-3 text-[13px] text-slate-600 font-bold">
+                          <CheckCircle2 size={16} className="text-[#0E625E] shrink-0 mt-1" />
+                          <span className="leading-snug">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="pt-4 border-t border-slate-50 mt-auto">
+                      <Link href="/register">
+                        <button className={`w-full h-14 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 group/btn ${key === "ninho" ? "bg-[#0E625E] text-white shadow-lg hover:bg-[#D4C19D]" : "bg-slate-50 text-[#0E625E] hover:bg-[#0E625E]/5"}`}>
+                          {t.pricing.cta} <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-24 text-center text-slate-400 font-bold text-xs uppercase tracking-[0.4em] flex items-center justify-center gap-4">
+              <div className="h-[1px] w-16 bg-slate-100" />
+              <Shield size={14} className="text-[#0E625E]/40" /> {t.pricing.pixLabel} • {isYearly ? t.pricing.yearlySub : t.pricing.monthlySub}
+              <div className="h-[1px] w-16 bg-slate-100" />
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Expanded */}
          <section id="faq" className="max-w-[1240px] mx-auto px-6 py-32 bg-[#FAFAFA] border-y border-[#E8E8E8]">
              <div className="max-w-3xl mx-auto text-center mb-24">
                <span className="text-[#0E625E] font-bold uppercase tracking-[0.2em] text-[11px] mb-4 block">SUPORTE E TRANQUILIDADE</span>
