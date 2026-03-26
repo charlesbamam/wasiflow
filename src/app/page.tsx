@@ -16,6 +16,7 @@ import {
   BookOpen,
   Gamepad,
   CheckCircle2,
+  Trophy,
   LayoutDashboard,
   Users,
   Bell
@@ -72,7 +73,7 @@ export default function LandingPage() {
           <div className="absolute inset-0 bg-grid-pattern [mask-image:linear-gradient(to_bottom,#000_15%,transparent_55%)] pointer-events-none z-0" />
           
           {/* Hero Section */}
-          <section id="product" className="max-w-[1240px] mx-auto px-6 py-24 md:py-32 text-center relative z-10">
+          <section id="product" className="max-w-[1240px] mx-auto px-6 py-32 md:py-48 text-center relative z-10">
             <div className="fade-up inline-flex items-center gap-2 bg-[#0E625E]/5 text-[#0E625E] border border-[#0E625E]/10 px-4 py-1.5 rounded-full text-[11px] font-bold tracking-wider mb-10 uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-[#0E625E] animate-pulse" />
               {t.hero.badge}
@@ -107,28 +108,36 @@ export default function LandingPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
               {/* Floating elements */}
-              <div className="absolute -top-6 -right-6 md:-right-8 bg-white p-4 rounded-xl shadow-xl border border-slate-100 hidden md:flex items-center gap-3 animate-float">
-                <div className="bg-[#D4C19D] p-2 rounded-lg"><BookOpen size={18} className="text-white" /></div>
-                <div className="text-left">
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Currículo</p>
-                  <p className="text-sm font-bold text-[#0E625E]">BNCC Integrada</p>
+                <div className="absolute -top-6 -right-6 md:-right-8 bg-white p-4 rounded-xl shadow-xl border border-slate-100 hidden md:flex items-center gap-3 animate-float">
+                  <div className="bg-[#D4C19D] p-2 rounded-lg"><BookOpen size={18} className="text-white" /></div>
+                  <div className="text-left">
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">{t.hero.floating.curriculum}</p>
+                    <p className="text-sm font-bold text-[#0E625E]">{t.hero.floating.bncc}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="absolute -bottom-6 -left-6 md:-left-8 bg-white p-4 rounded-xl shadow-xl border border-slate-100 hidden md:flex items-center gap-3 animate-float" style={{ animationDelay: '2s' }}>
-                <div className="bg-[#0E625E] p-2 rounded-lg"><CheckCircle2 size={18} className="text-white" /></div>
-                <div className="text-left">
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Progresso</p>
-                  <p className="text-sm font-bold text-[#0E625E]">Relatório Pronto</p>
+                <div className="absolute -bottom-10 -left-6 md:-left-12 bg-white p-4 rounded-xl shadow-xl border border-slate-100 hidden md:flex items-center gap-3 animate-float" style={{ animationDelay: '2s' }}>
+                  <div className="bg-[#0E625E] p-2 rounded-lg"><CheckCircle2 size={18} className="text-white" /></div>
+                  <div className="text-left">
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">{t.hero.floating.progress}</p>
+                    <p className="text-sm font-bold text-[#0E625E]">{t.hero.floating.report}</p>
+                  </div>
                 </div>
-              </div>
+                {/* New Gamification Badge */}
+                <div className="absolute top-1/2 -left-8 md:-left-16 -translate-y-1/2 bg-white p-4 rounded-xl shadow-xl border border-slate-100 hidden md:flex items-center gap-3 animate-float" style={{ animationDelay: '1s' }}>
+                  <div className="bg-[#D4C19D] p-2 rounded-lg"><Trophy size={18} className="text-white" /></div>
+                  <div className="text-left">
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">{t.hero.floating.gamification}</p>
+                    <p className="text-sm font-bold text-[#0E625E]">{t.hero.floating.gamificationDesc}</p>
+                  </div>
+                </div>
             </div>
           </section>
         </div>
 
         {/* Dynamic Features Grid */}
-        <section id="features" className="bg-[#F0F9F9]/50 border-y border-slate-100 py-32 overflow-hidden">
+        <section id="features" className="bg-[#F0F9F9]/50 border-y border-slate-100 py-48 overflow-hidden">
           <div className="max-w-[1240px] mx-auto px-6">
-            <div className="reveal-on-scroll text-center mb-16">
+            <div className="reveal-on-scroll text-center mb-24">
               <span className="text-[#0E625E] font-bold uppercase tracking-[0.2em] text-[11px] mb-4 block">{t.features.tag}</span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#0B0B0B] mb-6 max-w-4xl mx-auto">
                 {t.features.title}
@@ -136,7 +145,7 @@ export default function LandingPage() {
             </div>
 
             {/* Feature Splits */}
-            <div className="space-y-20 md:space-y-24">
+            <div className="space-y-32 md:space-y-48">
                {/* Split 1: Evidence Journal */}
                <div className="reveal-on-scroll flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
                   <div className="flex-1 space-y-6">
@@ -299,7 +308,7 @@ export default function LandingPage() {
         </section>
 
          {/* Articles Section */}
-         <section id="conhecimento" className="py-32 bg-white border-t border-[#FAFAFA]">
+         <section id="conhecimento" className="py-48 bg-white border-t border-[#FAFAFA]">
            <div className="max-w-[1240px] mx-auto px-6">
               <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                  <div className="max-w-2xl">
@@ -355,7 +364,7 @@ export default function LandingPage() {
 
  
         {/* Pricing Section */}
-        <section id="pricing" className="py-32 bg-white">
+        <section id="pricing" className="py-48 bg-white">
           <div className="max-w-[1240px] mx-auto px-6">
             <div className="reveal-on-scroll text-center mb-16">
               <span className="text-[#0E625E] font-bold uppercase tracking-[0.2em] text-[11px] mb-4 block">{t.pricing.tag}</span>
@@ -441,7 +450,7 @@ export default function LandingPage() {
         </section>
 
         {/* FAQ Expanded */}
-         <section id="faq" className="max-w-[1240px] mx-auto px-6 py-32 bg-[#FAFAFA] border-y border-[#E8E8E8]">
+         <section id="faq" className="max-w-[1240px] mx-auto px-6 py-48 bg-[#FAFAFA] border-y border-[#E8E8E8]">
              <div className="max-w-3xl mx-auto text-center mb-24">
                <span className="text-[#0E625E] font-bold uppercase tracking-[0.2em] text-[11px] mb-4 block">SUPORTE E TRANQUILIDADE</span>
                <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#0B0B0B] mb-8">
@@ -478,7 +487,7 @@ export default function LandingPage() {
          </section>
 
         {/* Newsletter Clean */}
-        <section className="max-w-[1240px] mx-auto px-6 py-32 bg-white">
+        <section className="max-w-[1240px] mx-auto px-6 py-48 bg-white">
            <div className="reveal-on-scroll bg-[#0E625E] rounded-[48px] p-12 md:p-24 text-center relative overflow-hidden">
               <div className="max-w-2xl mx-auto relative z-10">
                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-8 leading-tight">

@@ -59,7 +59,15 @@ export const translations = {
       title: "Eduque em casa com propósito,",
       titleAccent: "gerencie com alegria.",
       desc: "Gerencie o <b>Homeschool</b> dos seus filhos sem complicação —<br />com <b>Assistente de IA</b> baseada na BNCC, registros automáticos e gamificação que mantém a motivação em alta.",
-      ctaPrimary: "Começar Agora"
+      ctaPrimary: "Começar Agora",
+      floating: {
+        curriculum: "AJUDA COM CURRÍCULO",
+        bncc: "IA Treinada com BNCC",
+        progress: "Progresso",
+        report: "Relatório Pronto",
+        gamification: "GAMEFICAÇÃO",
+        gamificationDesc: "Motive seus filhos a aprenderem mais"
+      }
     },
     features: {
       tag: "SOLUÇÕES COMPLETAS",
@@ -320,7 +328,15 @@ export const translations = {
       title: "Homeschool with purpose,",
       titleAccent: "manage with joy.",
       desc: "Manage your children's <b>Homeschool</b> without complications —<br />with a <b>BNCC-based AI Assistant</b>, automatic records, and gamification that keeps motivation high.",
-      ctaPrimary: "Get Started"
+      ctaPrimary: "Get Started",
+      floating: {
+        curriculum: "CURRICULUM HELP",
+        bncc: "AI Trained with BNCC",
+        progress: "Progress",
+        report: "Report Ready",
+        gamification: "GAMIFICATION",
+        gamificationDesc: "Motivate your kids to learn more"
+      }
     },
     features: {
       tag: "COMPLETE SOLUTIONS",
@@ -539,7 +555,15 @@ export const translations = {
       title: "Eduque en casa con propósito,",
       titleAccent: "gestione con alegría.",
       desc: "Gestione el <b>Homeschool</b> de sus hijos sin complicaciones —<br />con <b>Asistente de IA</b> basada en la BNCC, registros automáticos y gamificación que mantiene la motivación en alto.",
-      ctaPrimary: "Empezar Ahora"
+      ctaPrimary: "Empezar Ahora",
+      floating: {
+        curriculum: "AYUDA CON CURRÍCULO",
+        bncc: "IA Entrenada con BNCC",
+        progress: "Progreso",
+        report: "Informe Listo",
+        gamification: "GAMIFICACIÓN",
+        gamificationDesc: "Motive a sus hijos a aprender más"
+      }
     },
     features: {
       tag: "SOLUCIONES COMPLETAS",
